@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="DslOverXamlDemo.View.OrderProcessingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:DslOverXamlDemo.ViewModel"
+             xmlns:model="clr-namespace:DslOverXamlDemo.Model;assembly=DslOverXamlDemo.Model"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance {x:Type vm:OrderProcessingViewModel}}">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type GroupBox}">
+            <Setter Property="Foreground" Value="Blue"/>
+        </Style>
+
+        <DataTemplate x:Key="DiscountItems" DataType="{x:Type model:OrderDiscount}">
+            <ItemsControl Style="{StaticResource ToolBarStyle}">
+                <TextBlock Text="ID:"/>
+                <TextBlock Text="{Binding OrderItemId, StringFormat='[{0}]'}"/>
+                <TextBlock Text="{Binding DiscountType}"/>
+                <TextBlock Text="{Binding Operand, StringFormat='({0})'}"/>
+            </ItemsControl>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Row="1" Grid.Column="0">
+            <GroupBox DockPanel.Dock="Right" Header="Processing" Margin="5">
+                <StackPanel>
+                    <ItemsControl Style="{StaticResource ToolBarStyle}">
+                        <Button Content="Process Order" Command="{Binding ProcessCommand}"/>
+                    </ItemsControl>
+                    <StackPanel>
+                        <ItemsControl Style="{StaticResource ToolBarStyle}">
+                            <TextBlock Text="Total Amount:"/>
+                            <TextBlock Text="{Binding Total, StringFormat=C}" Foreground="DarkRed" FontSize="14" FontWeight="Bold"/>
+                        </ItemsControl>
+                        <ItemsControl ItemsSource="{Binding Discounts}" ItemTemplate="{StaticResource DiscountItems}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <StackPanel DockPanel.Dock="Top">
+                <GroupBox Header="Order" Margin="5">
+                    <StackPanel>
+                        <ItemsControl Style="{StaticResource ToolBarStyle}">
+                            <TextBlock Text="ID:"/>
+                            <TextBox Text="{Binding Order.Id}" IsReadOnly="True" MinWidth="50"/>
+
+                            <Separator Width="10" Visibility="Hidden" />
+
+                            <TextBlock Text="Name:"/>
+                            <TextBox Text="{Binding Order.Name}" IsReadOnly="True" MinWidth="50"/>
+
+                            <Separator Width="10" Visibility="Hidden" />
+
+                            <TextBlock Text="Date:"/>
+                            <TextBox Text="{Binding Order.Date}" IsReadOnly="True" MinWidth="50"/>
+                        </ItemsControl>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Customer" Margin="5">
+                    <StackPanel>
+                        <ItemsControl Style="{StaticResource ToolBarStyle}">
+                            <TextBlock Text="ID:"/>
+                            <TextBox Text="{Binding Order.Customer.Id}" IsReadOnly="True" MinWidth="50"/>
+
+                            <Separator Width="10" Visibility="Hidden" />
+
+                            <TextBlock Text="Name:"/>
+                            <TextBox Text="{Binding Order.Customer.Name}" IsReadOnly="True" MinWidth="50"/>
+
+                            <Separator Width="10" Visibility="Hidden" />
+
+                            <TextBlock Text="Age:"/>
+                            <TextBox Text="{Binding Order.Customer.Age}" IsReadOnly="True" MinWidth="50"/>
+
+                            <Separator Width="10" Visibility="Hidden" />
+
+                            <TextBlock Text="Email:"/>
+                            <TextBox Text="{Binding Order.Customer.Email}" IsReadOnly="True" MinWidth="50"/>
+                        </ItemsControl>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+
+            <GroupBox Header="Order Items" Margin="5">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Order.Items}" IsReadOnly="True" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Item ID" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="Product ID" Binding="{Binding Product.Id}"/>
+                        <DataGridTextColumn Header="Product Name" Binding="{Binding Product.Name}"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Product.Description}"/>
+                        <DataGridTextColumn Header="Category" Binding="{Binding Product.Category}"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Product.Price}"/>
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </DockPanel>
+    </Grid>
+</UserControl>

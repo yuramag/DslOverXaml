@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:DslOverXamlDemo.ViewModel"
+                    xmlns:v="clr-namespace:DslOverXamlDemo.View">
+
+    <DataTemplate DataType="{x:Type vm:DataStoreViewModel}">
+        <v:DataStoreView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:LoggingViewModel}">
+        <v:LoggingView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SampleRuleViewModel}">
+        <v:SampleRuleView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:OrderProcessingViewModel}">
+        <v:OrderProcessingView />
+    </DataTemplate>
+
+</ResourceDictionary>

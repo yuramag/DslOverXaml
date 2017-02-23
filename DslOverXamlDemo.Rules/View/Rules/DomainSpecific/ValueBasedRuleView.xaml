@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="DslOverXamlDemo.Rules.View.ValueBasedRuleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:DslOverXamlDemo.Rules.ViewModel"
+             xmlns:view="clr-namespace:DslOverXamlDemo.Rules.View"
+             xmlns:model="clr-namespace:DslOverXamlDemo.Rules.Model"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="600"
+             d:DataContext="{d:DesignInstance {x:Type vm:ApplyAbsoluteDiscountViewModel}}">
+    <view:RuleBaseView>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Visibility="{Binding Value.HasValue, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                <ItemsControl Style="{StaticResource RulesToolBar}">
+                    <Menu Focusable="False">
+                        <MenuItem Header="Set Value" ItemsSource="{x:Static model:ModelMetadataManager.AllValues}" ItemTemplate="{StaticResource ModelsMenuItemsStyle}">
+                            <MenuItem.ItemContainerStyle>
+                                <Style TargetType="{x:Type MenuItem}">
+                                    <Setter Property="Command" Value="{Binding DataContext.SetValueCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"/>
+                                    <Setter Property="CommandParameter" Value="{Binding ModelType}"/>
+                                </Style>
+                            </MenuItem.ItemContainerStyle>
+                        </MenuItem>
+                    </Menu>
+                </ItemsControl>
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding Value.HasValue, Converter={StaticResource BoolToVisibilityConverter}}">
+                <ContentPresenter Content="{Binding Value.ViewModel}" 
+                                  view:SuperProperties.Command="{Binding DataContext.SetValueCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                                  view:SuperProperties.CommandParameter="{x:Null}" />
+            </StackPanel>
+        </DockPanel>
+    </view:RuleBaseView>
+</UserControl>

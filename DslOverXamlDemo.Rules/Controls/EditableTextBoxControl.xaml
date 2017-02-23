@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="DslOverXamlDemo.Rules.Controls.EditableTextBoxControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             MinWidth="65"
+             mc:Ignorable="d" d:DesignHeight="50" d:DesignWidth="200">
+    <UserControl.Resources>
+        <DataTemplate x:Key="EditModeTemplate">
+            <TextBox Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static system:String.Empty}}" 
+                     VerticalAlignment="Center" MinWidth="100" 
+                     Loaded="EditElement_OnLoaded" KeyDown="EditElement_OnKeyDown" LostFocus="EditElement_OnLostFocus"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DisplayModeTemplate">
+            <Border Padding="4,0">
+                <TextBlock Text="{Binding Text, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" 
+                           VerticalAlignment="Center" MouseLeftButtonDown="DisplayElement_OnMouseLeftButtonDown" >
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" Value="{x:Null}">
+                                    <Setter Property="Background" Value="Beige"/>
+                                    <Setter Property="MinWidth" Value="100"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" Value="{x:Static system:String.Empty}">
+                                    <Setter Property="Background" Value="Beige"/>
+                                    <Setter Property="MinWidth" Value="100"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Border>
+        </DataTemplate>
+
+        <Style x:Key="TemplateSelectorStyle" TargetType="{x:Type ContentControl}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsInEditMode, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" Value="True">
+                    <Setter Property="ContentTemplate" Value="{StaticResource EditModeTemplate}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsInEditMode, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" Value="False">
+                    <Setter Property="ContentTemplate" Value="{StaticResource DisplayModeTemplate}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <ContentControl Style="{StaticResource TemplateSelectorStyle}" />
+    </Grid>
+</UserControl>

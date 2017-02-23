@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B47C6AD5-8FAC-444D-B355-6E8CE78B05BB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DslOverXamlDemo.Rules</RootNamespace>
+    <AssemblyName>DslOverXamlDemo.Rules</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\EditableTextBoxControl.xaml.cs">
+      <DependentUpon>EditableTextBoxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelMetadata.cs" />
+    <Compile Include="Model\ModelMetadataManager.cs" />
+    <Compile Include="Model\ModelType.cs" />
+    <Compile Include="Model\RuleModelFactory.cs" />
+    <Compile Include="Model\RuleSectionsTree.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\AllMatchViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\AnyMatchViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\ConditionSetViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\DomainSpecific\CustomerAgeViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\DomainSpecific\OrderDateViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\DomainSpecific\OrderItemsCountViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\DomainSpecific\ProductCategoryViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\DomainSpecific\ProductPriceViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\DomainSpecific\ProductQuantityViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\FalseViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\NotViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\DomainSpecific\RangeConditionViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\TrueViewModel.cs" />
+    <Compile Include="ViewModel\Rules\DomainSpecific\ValueBasedRuleViewModel.cs" />
+    <Compile Include="ViewModel\Values\ConstantViewModel.cs" />
+    <Compile Include="ViewModel\Values\ProductClearancePercentViewModel.cs" />
+    <Compile Include="ViewModel\Values\ProductTodaysPriceViewModel.cs" />
+    <Compile Include="ViewModel\Values\ValueBaseViewModel.cs" />
+    <Compile Include="ViewModel\Rules\DomainSpecific\ApplyAbsoluteDiscountViewModel.cs" />
+    <Compile Include="ViewModel\Rules\DomainSpecific\ApplyAdditiveDiscountViewModel.cs" />
+    <Compile Include="ViewModel\Rules\DomainSpecific\ApplyMultiplicativeDiscountViewModel.cs" />
+    <Compile Include="ViewModel\Rules\DomainSpecific\ApplyPercentDiscountViewModel.cs" />
+    <Compile Include="ViewModel\Conditions\ConditionBaseViewModel.cs" />
+    <Compile Include="ViewModel\Rules\ConditionRuleViewModel.cs" />
+    <Compile Include="ViewModel\Rules\EmptyRuleViewModel.cs" />
+    <Compile Include="Model\ModelBindingAttribute.cs" />
+    <Compile Include="ViewModel\Rules\RuleBaseViewModel.cs" />
+    <Compile Include="ViewModel\Rules\RuleSetViewModel.cs" />
+    <Compile Include="View\Conditions\ConditionBaseView.xaml.cs">
+      <DependentUpon>ConditionBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conditions\DomainSpecific\ProductCategoryView.xaml.cs">
+      <DependentUpon>ProductCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conditions\DomainSpecific\RangeConditionView.xaml.cs">
+      <DependentUpon>RangeConditionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conditions\NotView.xaml.cs">
+      <DependentUpon>NotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conditions\ConditionSetView.xaml.cs">
+      <DependentUpon>ConditionSetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conditions\EmptyConditionView.xaml.cs">
+      <DependentUpon>EmptyConditionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\SuperProperties.cs" />
+    <Compile Include="View\Rules\ConditionRuleView.xaml.cs">
+      <DependentUpon>ConditionRuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Rules\DomainSpecific\ValueBasedRuleView.xaml.cs">
+      <DependentUpon>ValueBasedRuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Rules\RuleBaseView.xaml.cs">
+      <DependentUpon>RuleBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Rules\EmptyRuleView.xaml.cs">
+      <DependentUpon>EmptyRuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Rules\RuleSetView.xaml.cs">
+      <DependentUpon>RuleSetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Values\ConstantView.xaml.cs">
+      <DependentUpon>ConstantView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Values\DomainSpecific\ProductClearancePercentView.xaml.cs">
+      <DependentUpon>ProductClearancePercentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Values\ValueBaseView.xaml.cs">
+      <DependentUpon>ValueBaseView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\EditableTextBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Templates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Conditions\ConditionBaseView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Conditions\DomainSpecific\ProductCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Conditions\DomainSpecific\RangeConditionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Conditions\NotView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Conditions\ConditionSetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Conditions\EmptyConditionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Rules\ConditionRuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Rules\DomainSpecific\ValueBasedRuleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Rules\RuleBaseView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Rules\EmptyRuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Rules\RuleSetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Values\ConstantView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Values\DomainSpecific\ProductClearancePercentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Values\ValueBaseView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DslOverXamlDemo.Contracts\DslOverXamlDemo.Contracts.csproj">
+      <Project>{9D721615-A1A7-4E49-A42E-A2D6284A6CC1}</Project>
+      <Name>DslOverXamlDemo.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DslOverXamlDemo.Interface\DslOverXamlDemo.Interface.csproj">
+      <Project>{860C831B-672A-4069-A0BE-2E5733D736C6}</Project>
+      <Name>DslOverXamlDemo.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
