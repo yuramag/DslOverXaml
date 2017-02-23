@@ -29,7 +29,7 @@ namespace DslOverXamlDemo.Rules.ViewModel
             {
                 if (m_conditions != value)
                 {
-                    m_conditions = null;
+                    m_conditions = value;
                     NotifyOfPropertyChange(() => Conditions);
                     Changed();
                 }

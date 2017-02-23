@@ -28,7 +28,7 @@ namespace DslOverXamlDemo.Rules.ViewModel
             {
                 if (m_condition != value)
                 {
-                    m_condition = null;
+                    m_condition = value;
                     NotifyOfPropertyChange(() => Condition);
                     Changed();
                 }
@@ -44,7 +44,7 @@ namespace DslOverXamlDemo.Rules.ViewModel
             {
                 if (m_rule != value)
                 {
-                    m_rule = null;
+                    m_rule = value;
                     NotifyOfPropertyChange(() => Rule);
                     Changed();
                 }

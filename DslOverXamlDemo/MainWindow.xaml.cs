@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using DslOverXamlDemo.ViewModel;
 
 namespace DslOverXamlDemo
@@ -9,6 +10,11 @@ namespace DslOverXamlDemo
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            ((MainWindowViewModel) DataContext).HandleClosing(e);
         }
     }
 }

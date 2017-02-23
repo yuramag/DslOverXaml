@@ -10,7 +10,7 @@
              d:DataContext="{d:DesignInstance {x:Type vm:AllMatchViewModel}}">
     <view:ConditionBaseView>
         <DockPanel>
-            <StackPanel DockPanel.Dock="Top">
+            <StackPanel DockPanel.Dock="Bottom">
                 <ItemsControl Style="{StaticResource RulesToolBar}">
                     <Button Content="Clear" Command="{Binding ClearConditionsCommand}"/>
                     <Menu Focusable="False" Background="{x:Null}">

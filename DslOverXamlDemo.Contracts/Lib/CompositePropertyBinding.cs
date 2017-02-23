@@ -7,13 +7,16 @@ namespace DslOverXamlDemo.Contracts.Lib
     {
         private readonly IViewModel m_viewModel;
         private readonly Action m_onChange;
+        private readonly Func<TProp, IModel<TProp>> m_factory;
         private readonly Expression<Func<IModel<TProp>>> m_property;
         private readonly Expression<Func<TProp>> m_modelProperty;
 
-        public CompositePropertyBinding(IViewModel viewModel, Action onChange, Expression<Func<IModel<TProp>>> property, Expression<Func<TProp>> modelProperty)
+        public CompositePropertyBinding(IViewModel viewModel, Action onChange, Func<TProp, IModel<TProp>> factory, 
+            Expression<Func<IModel<TProp>>> property, Expression<Func<TProp>> modelProperty)
         {
             m_viewModel = viewModel;
             m_onChange = onChange;
+            m_factory = factory;
             m_property = property;
             m_modelProperty = modelProperty;
         }
@@ -29,7 +32,7 @@ namespace DslOverXamlDemo.Contracts.Lib
         public void Set(TProp value)
         {
             SetPropertyValue(m_viewModel.Model, m_modelProperty, value);
-            SetPropertyValue(m_viewModel, m_property, null);
+            SetPropertyValue(m_viewModel, m_property, m_factory(value));
             m_onChange();
         }
 
@@ -41,7 +44,7 @@ namespace DslOverXamlDemo.Contracts.Lib
             var value = type == null ? default(TProp) : (TProp) Activator.CreateInstance(type);
 
             SetPropertyValue(m_viewModel.Model, m_modelProperty, value);
-            SetPropertyValue(m_viewModel, m_property, null);
+            SetPropertyValue(m_viewModel, m_property, m_factory(value));
 
             m_onChange();
         }

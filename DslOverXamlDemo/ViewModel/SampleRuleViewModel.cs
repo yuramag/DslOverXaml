@@ -6,6 +6,7 @@ using DslOverXamlDemo.Contracts.Lib;
 using DslOverXamlDemo.Interface;
 using DslOverXamlDemo.Properties;
 using DslOverXamlDemo.Rules.Model;
+using DslOverXamlDemo.Rules.ViewModel;
 using DslOverXamlDemo.Samples;
 
 namespace DslOverXamlDemo.ViewModel
@@ -24,10 +25,10 @@ namespace DslOverXamlDemo.ViewModel
                     m_data = value;
                     m_asText = null;
                     m_asXaml = null;
-                    m_asGraph = null;
+                    m_designer = null;
                     NotifyOfPropertyChange(() => AsXaml);
                     NotifyOfPropertyChange(() => AsText);
-                    NotifyOfPropertyChange(() => AsGraph);
+                    NotifyOfPropertyChange(() => Designer);
                     NotifyOfPropertyChange(() => Data);
                     IsInEditMode = false;
                     Changed();
@@ -64,25 +65,25 @@ namespace DslOverXamlDemo.ViewModel
             }
         }
 
-        private IModel<Rule> m_asGraph;
+        private RuleDesigner m_designer;
 
-        public IModel<Rule> AsGraph
+        public RuleDesigner Designer
         {
             get
             {
-                if (m_asGraph == null)
+                if (m_designer == null)
                 {
                     try
                     {
-                        var ticket = SimpleXamlSerializer.FromXaml<Rule>(AsText);
-                        m_asGraph = RuleModelFactory.CreateModel(ticket, m => IsGraphChanged = true);
+                        m_designer = new RuleDesigner(AsText);
+                        m_designer.OnModified += (sender, args) => IsGraphChanged = true;
                     }
                     catch (Exception ex)
                     {
                         LogError(ex);
                     }
                 }
-                return m_asGraph;
+                return m_designer;
             }
         }
 
@@ -97,7 +98,7 @@ namespace DslOverXamlDemo.ViewModel
                 {
                     m_isGraphChanged = value;
                     NotifyOfPropertyChange(() => IsGraphChanged);
-                    NotifyOfPropertyChange(() => AsGraph);
+                    NotifyOfPropertyChange(() => Designer);
                     NotifyOfPropertyChange(() => IsGraphChangedOrInEditMode);
                     if (IsAutoApply)
                         ApplyGraph();
@@ -198,24 +199,6 @@ namespace DslOverXamlDemo.ViewModel
 
         public ICommand SaveCommand => m_saveCommand ?? (m_saveCommand = new RelayCommand(() => Save(), () => IsModified));
 
-        private ICommand m_setRuleTypeCommand;
-
-        public ICommand SetRuleTypeCommand
-        {
-            get
-            {
-                return m_setRuleTypeCommand ?? (m_setRuleTypeCommand = new RelayCommand<Type>(type =>
-                {
-                    if (m_asGraph?.Value?.GetType() == type)
-                        return;
-                    var rule = (Rule) Activator.CreateInstance(type);
-                    m_asGraph = RuleModelFactory.CreateModel(rule, m => IsGraphChanged = true);
-                    NotifyOfPropertyChange(() => AsGraph);
-                    IsGraphChanged = true;
-                }, item => item != null));
-            }
-        }
-
         private void LoadDefault()
         {
             Data = SimpleXamlSerializer.ToXaml(SampleRules.CreateSampleRule());
@@ -234,10 +217,10 @@ namespace DslOverXamlDemo.ViewModel
 
         public void ApplyGraph()
         {
-            if (m_asGraph == null || !IsGraphChanged)
+            if (m_designer == null || !IsGraphChanged)
                 return;
 
-            AsText = SimpleXamlSerializer.ToXaml(AsGraph.Value);
+            AsText = SimpleXamlSerializer.ToXaml(Designer.Model.Value);
             IsInEditMode = false;
             IsGraphChanged = false;
             Changed();

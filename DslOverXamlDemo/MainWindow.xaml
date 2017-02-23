@@ -9,7 +9,7 @@
         mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="600" 
         d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
         WindowStartupLocation="CenterScreen"
-        Title="DSL over XAML Demo - Order Processing Engine" Height="600" Width="800">
+        Title="DSL over XAML Demo - Order Processing Engine" Height="600" Width="800" Closing="Window_Closing">
     <Window.Resources>
         
     </Window.Resources>

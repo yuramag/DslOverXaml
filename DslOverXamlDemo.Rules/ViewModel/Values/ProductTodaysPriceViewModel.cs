@@ -25,7 +25,7 @@ namespace DslOverXamlDemo.Rules.ViewModel
             {
                 if (m_defaultValue != value)
                 {
-                    m_defaultValue = null;
+                    m_defaultValue = value;
                     NotifyOfPropertyChange(() => DefaultValue);
                     Changed();
                 }

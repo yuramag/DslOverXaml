@@ -1,4 +1,6 @@
-﻿using DslOverXamlDemo.Contracts.Lib;
+﻿using System.ComponentModel;
+using System.Windows;
+using DslOverXamlDemo.Contracts.Lib;
 
 namespace DslOverXamlDemo.ViewModel
 {
@@ -60,6 +62,35 @@ namespace DslOverXamlDemo.ViewModel
                 {
                     m_orderProcessing = value;
                     NotifyOfPropertyChange(() => OrderProcessing);
+                }
+            }
+        }
+
+        public void HandleClosing(CancelEventArgs args)
+        {
+            if (DataStore.IsModified)
+            {
+                switch (MessageBox.Show("Save changes to the Sample Data?", "Saving changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
+                {
+                    case MessageBoxResult.Cancel:
+                        args.Cancel = true;
+                        return;
+                    case MessageBoxResult.Yes:
+                        DataStore.Save();
+                        break;
+                }
+            }
+
+            if (SampleRule.IsModified)
+            {
+                switch (MessageBox.Show("Save changes to the Sample Rule?", "Saving changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
+                {
+                    case MessageBoxResult.Cancel:
+                        args.Cancel = true;
+                        return;
+                    case MessageBoxResult.Yes:
+                        SampleRule.Save();
+                        break;
                 }
             }
         }

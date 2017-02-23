@@ -1,6 +1,3 @@
-using System.Windows;
-using System.Windows.Input;
-using DslOverXamlDemo.Contracts.Lib;
 using DslOverXamlDemo.Interface;
 using DslOverXamlDemo.Rules.Model;
 
@@ -12,10 +9,5 @@ namespace DslOverXamlDemo.Rules.ViewModel
         public EmptyRuleViewModel(EmptyRule model) : base(model)
         {
         }
-
-        public ICommand TestCommand { get; } = new RelayCommand(() =>
-        {
-            MessageBox.Show("TEST");
-        });
     }
 }

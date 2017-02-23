@@ -23,12 +23,12 @@ namespace DslOverXamlDemo.Rules.ViewModel
 
         protected CompositePropertyBinding<TProp> CreatePropertyBinding<TProp>(Expression<Func<IModel<TProp>>> property, Expression<Func<TProp>> modelProperty)
         {
-            return new CompositePropertyBinding<TProp>(this, Changed, property, modelProperty);
+            return new CompositePropertyBinding<TProp>(this, Changed, x => RuleModelFactory.CreateModel(x, m => Changed()), property, modelProperty);
         }
 
         protected CompositeCollectionPropertyBinding<TProp> CreateCollectionBinding<TProp>(Expression<Func<ICollection<IModel<TProp>>>> property, Expression<Func<ICollection<TProp>>> modelProperty)
         {
-            return new CompositeCollectionPropertyBinding<TProp>(this, Changed, property, modelProperty);
+            return new CompositeCollectionPropertyBinding<TProp>(this, Changed, x => RuleModelFactory.CreateModel(x, m => Changed()), property, modelProperty);
         }
     }
 }

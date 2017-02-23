@@ -2,8 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:DslOverXamlDemo.Rules.ViewModel"
                     xmlns:v="clr-namespace:DslOverXamlDemo.Rules.View">
+    <!-- Designer -->
+
+    <DataTemplate DataType="{x:Type vm:RuleDesigner}">
+        <v:RuleDesignerView />
+    </DataTemplate>
+
     <!-- Rule Views -->
-    
+
     <DataTemplate DataType="{x:Type vm:EmptyRuleViewModel}">
         <v:EmptyRuleView />
     </DataTemplate>

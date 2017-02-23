@@ -9,7 +9,7 @@
              d:DataContext="{d:DesignInstance {x:Type contracts:IViewModel}}">
     <UserControl.Template>
         <ControlTemplate TargetType="{x:Type UserControl}">
-            <Border Margin="5" CornerRadius="5" SnapsToDevicePixels="True" BorderThickness="1" BorderBrush="{StaticResource RuleBorderBrush}">
+            <Border Margin="5" CornerRadius="5" SnapsToDevicePixels="True" BorderThickness="1" BorderBrush="{StaticResource RuleBorderBrush}" Style="{StaticResource VisibilityAnimation}">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top" Background="{StaticResource RuleBorderBrush}" MinHeight="20">
                         <Button DockPanel.Dock="Right" Style="{StaticResource FlatCloseButton}"

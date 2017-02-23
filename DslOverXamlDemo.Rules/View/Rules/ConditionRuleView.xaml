@@ -12,7 +12,7 @@
         <StackPanel>
             <StackPanel>
                 <ItemsControl Style="{StaticResource RulesToolBar}" Visibility="{Binding Condition.HasValue, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                    <Menu Focusable="False">
+                    <Menu>
                         <MenuItem Header="Set Condition" ItemsSource="{x:Static model:ModelMetadataManager.AllConditions}" ItemTemplate="{StaticResource ModelsMenuItemsStyle}">
                             <MenuItem.ItemContainerStyle>
                                 <Style TargetType="{x:Type MenuItem}">
@@ -33,7 +33,7 @@
 
             <StackPanel>
                 <ItemsControl Style="{StaticResource RulesToolBar}" Visibility="{Binding Rule.HasValue, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                    <Menu Focusable="False">
+                    <Menu>
                         <MenuItem Header="Set Rule" ItemsSource="{x:Static model:ModelMetadataManager.AllRules}" ItemTemplate="{StaticResource ModelsMenuItemsStyle}">
                             <MenuItem.ItemContainerStyle>
                                 <Style TargetType="{x:Type MenuItem}">

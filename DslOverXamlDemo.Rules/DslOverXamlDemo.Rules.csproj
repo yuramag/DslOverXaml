@@ -67,6 +67,7 @@
     <Compile Include="ViewModel\Conditions\NotViewModel.cs" />
     <Compile Include="ViewModel\Conditions\DomainSpecific\RangeConditionViewModel.cs" />
     <Compile Include="ViewModel\Conditions\TrueViewModel.cs" />
+    <Compile Include="ViewModel\RuleDesigner.cs" />
     <Compile Include="ViewModel\Rules\DomainSpecific\ValueBasedRuleViewModel.cs" />
     <Compile Include="ViewModel\Values\ConstantViewModel.cs" />
     <Compile Include="ViewModel\Values\ProductClearancePercentViewModel.cs" />
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="View\Rules\RuleSetView.xaml.cs">
       <DependentUpon>RuleSetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RuleDesignerView.xaml.cs">
+      <DependentUpon>RuleDesignerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Values\ConstantView.xaml.cs">
       <DependentUpon>ConstantView.xaml</DependentUpon>
@@ -182,6 +186,10 @@
     <Page Include="View\Rules\RuleSetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RuleDesignerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Values\ConstantView.xaml">
       <Generator>MSBuild:Compile</Generator>

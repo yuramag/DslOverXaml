@@ -9,13 +9,16 @@ namespace DslOverXamlDemo.Contracts.Lib
     {
         private readonly IViewModel m_viewModel;
         private readonly Action m_onChange;
+        private readonly Func<TProp, IModel<TProp>> m_factory;
         private readonly Expression<Func<ICollection<IModel<TProp>>>> m_property;
         private readonly Expression<Func<ICollection<TProp>>> m_modelProperty;
         
-        public CompositeCollectionPropertyBinding(IViewModel viewModel, Action onChange, Expression<Func<ICollection<IModel<TProp>>>> property, Expression<Func<ICollection<TProp>>> modelProperty)
+        public CompositeCollectionPropertyBinding(IViewModel viewModel, Action onChange, Func<TProp, IModel<TProp>> factory, 
+            Expression<Func<ICollection<IModel<TProp>>>> property, Expression<Func<ICollection<TProp>>> modelProperty)
         {
             m_viewModel = viewModel;
             m_onChange = onChange;
+            m_factory = factory;
             m_property = property;
             m_modelProperty = modelProperty;
         }
@@ -72,7 +75,7 @@ namespace DslOverXamlDemo.Contracts.Lib
         public void Add(TProp value)
         {
             AddToCollection(m_viewModel.Model, m_modelProperty, value);
-            SetPropertyValue(m_viewModel, m_property, null);
+            AddToCollection(m_viewModel, m_property, m_factory(value));
             m_onChange();
         }
 
@@ -84,7 +87,7 @@ namespace DslOverXamlDemo.Contracts.Lib
             var value = (TProp)Activator.CreateInstance(type);
          
             AddToCollection(m_viewModel.Model, m_modelProperty, value);
-            SetPropertyValue(m_viewModel, m_property, null);
+            AddToCollection(m_viewModel, m_property, m_factory(value));
 
             m_onChange();
         }

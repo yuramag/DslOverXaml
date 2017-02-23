@@ -23,9 +23,9 @@ namespace DslOverXamlDemo.Rules.ViewModel
             get { return m_condition ?? (m_condition = RuleModelFactory.CreateModel(Model.Condition, m => Changed())); }
             set
             {
-                if (m_condition != null)
+                if (m_condition != value)
                 {
-                    m_condition = null;
+                    m_condition = value;
                     NotifyOfPropertyChange(() => Condition);
                     Changed();
                 }

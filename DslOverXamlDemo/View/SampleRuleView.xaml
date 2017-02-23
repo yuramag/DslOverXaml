@@ -65,21 +65,6 @@
                 <ItemsControl Style="{StaticResource ToolBarStyle}" Margin="0,5" Visibility="{Binding IsXmlView, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                     <!--<CheckBox Content="Auto" IsChecked="{Binding IsAutoApply}" Margin="0,3,0,0"/>-->
                     <Button Content="Apply" Command="{Binding ApplyGraphCommand}" Visibility="{Binding IsGraphChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    <Menu Focusable="False" Background="Transparent" VerticalAlignment="Center">
-                        <MenuItem Header="Set Rule Type..." ItemsSource="{x:Static rules:ModelMetadataManager.AllRules}" Foreground="Navy">
-                            <MenuItem.ItemTemplate>
-                                <DataTemplate DataType="{x:Type MenuItem}">
-                                    <TextBlock Text="{Binding Description}" Margin="4,0" VerticalAlignment="Center"/>
-                                </DataTemplate>
-                            </MenuItem.ItemTemplate>
-                            <MenuItem.ItemContainerStyle>
-                                <Style TargetType="{x:Type MenuItem}">
-                                    <Setter Property="Command" Value="{Binding DataContext.SetRuleTypeCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"/>
-                                    <Setter Property="CommandParameter" Value="{Binding ModelType}"/>
-                                </Style>
-                            </MenuItem.ItemContainerStyle>
-                        </MenuItem>
-                    </Menu>
                 </ItemsControl>
             </StackPanel>
         </StackPanel>
@@ -101,20 +86,7 @@
             </TabItem>
 
             <TabItem Header="Designer" Tag="{x:Static vm:CurrentTabItem.GraphView}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <ItemsControl DockPanel.Dock="Top" Style="{StaticResource ToolBarStyle}"/>
-                    </StackPanel>
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <StackPanel HorizontalAlignment="Left">
-                            <ContentControl Content="{Binding AsGraph.ViewModel}" />
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
+                <ContentPresenter Content="{Binding Designer}" />
             </TabItem>
         </TabControl>
     </DockPanel>

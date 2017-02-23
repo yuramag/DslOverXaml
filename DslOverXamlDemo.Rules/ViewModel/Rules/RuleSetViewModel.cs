@@ -30,7 +30,7 @@ namespace DslOverXamlDemo.Rules.ViewModel
             {
                 if (m_rules != value)
                 {
-                    m_rules = null;
+                    m_rules = value;
                     NotifyOfPropertyChange(() => Rules);
                     Changed();
                 }
