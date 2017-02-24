@@ -70,13 +70,14 @@ namespace DslOverXamlDemo.ViewModel
 
         public async Task ProcessOrderAsync()
         {
-            var rule = RuleBuilder.CreateRuleImp(Settings.Default.SampleRuleXaml);
+            var rule = RuleBuilder.CreateRuleImp(SampleRules.GetOrCreateSampleRule());
             if (rule == null)
                 throw new InvalidOperationException("Rule object is not defined.");
             var context = new OrderDiscountContext(Order);
             await context.ExecuteAsync(rule);
             Discounts = context.GetOrderDiscounts();
             Total = DiscountLogic.GetOrderTotalAmount(Order, Discounts);
+            LogInfo("Order has been processed successfully.");
         }
     }
 }

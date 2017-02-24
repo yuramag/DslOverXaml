@@ -10,6 +10,11 @@ namespace DslOverXamlDemo.Engine.Utils
             return SimpleXamlSerializer.FromXaml<Rule>(xaml);
         }
 
+        public static RuleImp CreateRuleImp(Rule rule)
+        {
+            return new RuleBuildingVisitor().Visit(rule);
+        }
+
         public static RuleImp CreateRuleImp(string xaml)
         {
             return new RuleBuildingVisitor().Visit(CreateRule(xaml));

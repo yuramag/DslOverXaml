@@ -5,7 +5,6 @@ using DslOverXamlDemo.Contracts;
 using DslOverXamlDemo.Contracts.Lib;
 using DslOverXamlDemo.Interface;
 using DslOverXamlDemo.Properties;
-using DslOverXamlDemo.Rules.Model;
 using DslOverXamlDemo.Rules.ViewModel;
 using DslOverXamlDemo.Samples;
 
@@ -13,6 +12,11 @@ namespace DslOverXamlDemo.ViewModel
 {
     public sealed class SampleRuleViewModel : ChangeableEx
     {
+        public SampleRuleViewModel()
+        {
+            m_data = SimpleXamlSerializer.ToXaml(SampleRules.GetOrCreateSampleRule());
+        }
+
         private string m_data;
 
         public string Data

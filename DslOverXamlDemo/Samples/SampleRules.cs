@@ -1,11 +1,17 @@
 ﻿using System;
 using DslOverXamlDemo.Interface;
 using DslOverXamlDemo.Model;
+using DslOverXamlDemo.Properties;
 
 namespace DslOverXamlDemo.Samples
 {
     public static class SampleRules
     {
+        public static Rule GetOrCreateSampleRule()
+        {
+            return Settings.Default.SampleRule ?? CreateSampleRule();
+        }
+
         public static Rule CreateSampleRule()
         {
             return new RuleSet
