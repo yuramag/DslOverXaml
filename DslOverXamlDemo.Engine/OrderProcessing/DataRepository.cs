@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace DslOverXamlDemo.Engine.Data
+namespace DslOverXamlDemo.Engine.OrderProcessing
 {
     public static class DataRepository
     {

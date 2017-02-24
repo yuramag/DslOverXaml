@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DslOverXamlDemo.Engine.Data;
+using DslOverXamlDemo.Engine.OrderProcessing;
 using DslOverXamlDemo.Interface;
 
 namespace DslOverXamlDemo.Engine.Parts
@@ -10,7 +10,7 @@ namespace DslOverXamlDemo.Engine.Parts
 
         public override async Task<Variable> GetValueAsync(IContext context)
         {
-            var productId = context.CurrentOrderItem.Product.Id;
+            var productId = context.GetService<OrderStateService>().CurrentOrderItem.Product.Id;
             var result = await DataRepository.GetProductTodaysPriceAsync(productId);
             return result > 0 || DefaultValue == null ? Variable.Create(result) : await DefaultValue.GetValueAsync(context);
         }

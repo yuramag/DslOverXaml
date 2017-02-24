@@ -35,17 +35,21 @@
     <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataRepository.cs" />
-    <Compile Include="Engine\DiscountLogic.cs" />
-    <Compile Include="Engine\OrderDiscountContext.cs" />
+    <Compile Include="OrderProcessing\DataRepository.cs" />
+    <Compile Include="Engine\Context.cs" />
+    <Compile Include="Engine\ContextExtensions.cs" />
+    <Compile Include="OrderProcessing\DiscountLogic.cs" />
+    <Compile Include="OrderProcessing\DiscountsContainerService.cs" />
+    <Compile Include="OrderProcessing\OrderDiscountContext.cs" />
+    <Compile Include="OrderProcessing\OrderStateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Parts\Bodies\ApplyPercentDiscountImp.cs" />
-    <Compile Include="Parts\Bodies\ApplyAbsoluteDiscountImp.cs" />
-    <Compile Include="Parts\Bodies\ApplyAdditiveDiscountImp.cs" />
-    <Compile Include="Parts\Bodies\ApplyMultiplicativeDiscountImp.cs" />
-    <Compile Include="Parts\Bodies\RuleImp.cs" />
-    <Compile Include="Parts\Bodies\EmptyRuleImp.cs" />
-    <Compile Include="Parts\Bodies\RuleSetImp.cs" />
+    <Compile Include="Parts\Rules\ApplyPercentDiscountImp.cs" />
+    <Compile Include="Parts\Rules\ApplyAbsoluteDiscountImp.cs" />
+    <Compile Include="Parts\Rules\ApplyAdditiveDiscountImp.cs" />
+    <Compile Include="Parts\Rules\ApplyMultiplicativeDiscountImp.cs" />
+    <Compile Include="Parts\Rules\RuleImp.cs" />
+    <Compile Include="Parts\Rules\EmptyRuleImp.cs" />
+    <Compile Include="Parts\Rules\RuleSetImp.cs" />
     <Compile Include="Parts\Conditions\AllMatchImp.cs" />
     <Compile Include="Parts\Conditions\AnyMatchImp.cs" />
     <Compile Include="Parts\Conditions\ConditionImp.cs" />
@@ -61,7 +65,7 @@
     <Compile Include="Parts\Conditions\RangeCondition.cs" />
     <Compile Include="Parts\Conditions\TrueImp.cs" />
     <Compile Include="Engine\IContext.cs" />
-    <Compile Include="Parts\Bodies\ConditionRuleImp.cs" />
+    <Compile Include="Parts\Rules\ConditionRuleImp.cs" />
     <Compile Include="Parts\Value\ConstantImp.cs" />
     <Compile Include="Parts\Value\ProductClearancePercentImp.cs" />
     <Compile Include="Parts\Value\ProductTodaysPriceImp.cs" />

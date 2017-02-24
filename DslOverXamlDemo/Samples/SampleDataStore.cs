@@ -37,6 +37,19 @@ namespace DslOverXamlDemo.Samples
                             Product = new Product
                             {
                                 Id = IdGenerator.AutoInc(),
+                                Category = ProductType.Electronics,
+                                Name = "Cell Phone",
+                                Description = "Smartphone",
+                                Price = 150M
+                            },
+                            Quantity = 1
+                        },
+                        new OrderItem
+                        {
+                            Id = IdGenerator.AutoInc(),
+                            Product = new Product
+                            {
+                                Id = IdGenerator.AutoInc(),
                                 Category = ProductType.Clothing,
                                 Name = "Shirt",
                                 Description = "Men's Shirt",

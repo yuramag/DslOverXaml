@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using DslOverXamlDemo.Engine.OrderProcessing;
 
 namespace DslOverXamlDemo.Engine.Parts
 {
@@ -8,7 +9,7 @@ namespace DslOverXamlDemo.Engine.Parts
     {
         protected override DateTime GetValue(IContext context)
         {
-            return context.Order.Date;
+            return context.GetService<OrderStateService>().Order.Date;
         }
     }
 }

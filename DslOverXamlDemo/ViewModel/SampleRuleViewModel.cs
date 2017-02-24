@@ -17,7 +17,7 @@ namespace DslOverXamlDemo.ViewModel
 
         public string Data
         {
-            get { return m_data ?? (m_data = Settings.Default.SampleRuleXaml); }
+            get { return m_data; }
             set
             {
                 if (m_data != value)
@@ -49,7 +49,7 @@ namespace DslOverXamlDemo.ViewModel
             set
             {
                 if (m_asXaml != value)
-                    LogOnError(() => Data = value.ToString());
+                    LogOnError(() => Data = value?.ToString());
             }
         }
 
@@ -61,7 +61,7 @@ namespace DslOverXamlDemo.ViewModel
             set
             {
                 if (m_asText != value)
-                    LogOnError(() => AsXaml = XElement.Parse(value));
+                    LogOnError(() => AsXaml = string.IsNullOrEmpty(value) ? null : XElement.Parse(value));
             }
         }
 

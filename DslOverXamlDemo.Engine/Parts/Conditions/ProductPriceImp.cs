@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using DslOverXamlDemo.Engine.OrderProcessing;
 
 namespace DslOverXamlDemo.Engine.Parts
 {
@@ -7,7 +8,7 @@ namespace DslOverXamlDemo.Engine.Parts
     {
         protected override decimal GetValue(IContext context)
         {
-            return context.CurrentOrderItem?.Product?.Price ?? 0M;
+            return context.GetService<OrderStateService>().CurrentOrderItem?.Product?.Price ?? 0M;
         }
     }
 }

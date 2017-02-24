@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using DslOverXamlDemo.Contracts;
 using DslOverXamlDemo.Contracts.Lib;
-using DslOverXamlDemo.Engine;
+using DslOverXamlDemo.Engine.OrderProcessing;
 using DslOverXamlDemo.Engine.Utils;
 using DslOverXamlDemo.Model;
 using DslOverXamlDemo.Properties;
@@ -73,8 +73,9 @@ namespace DslOverXamlDemo.ViewModel
             var rule = RuleBuilder.CreateRuleImp(Settings.Default.SampleRuleXaml);
             if (rule == null)
                 throw new InvalidOperationException("Rule object is not defined.");
-            IContext context = new OrderDiscountContext(Order);
-            Discounts = await context.ExecuteAsync(rule);
+            var context = new OrderDiscountContext(Order);
+            await context.ExecuteAsync(rule);
+            Discounts = context.GetOrderDiscounts();
             Total = DiscountLogic.GetOrderTotalAmount(Order, Discounts);
         }
     }

@@ -41,7 +41,7 @@
                     <StackPanel>
                         <ItemsControl Style="{StaticResource ToolBarStyle}">
                             <TextBlock Text="Total Amount:"/>
-                            <TextBlock Text="{Binding Total, StringFormat=C}" Foreground="DarkRed" FontSize="14" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Total, Mode=OneWay, StringFormat=C}" Foreground="DarkRed" FontSize="14" FontWeight="Bold"/>
                         </ItemsControl>
                         <ItemsControl ItemsSource="{Binding Discounts}" ItemTemplate="{StaticResource DiscountItems}"/>
                     </StackPanel>
@@ -93,17 +93,26 @@
             </StackPanel>
 
             <GroupBox Header="Order Items" Margin="5">
-                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Order.Items}" IsReadOnly="True" Margin="5">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Item ID" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="Product ID" Binding="{Binding Product.Id}"/>
-                        <DataGridTextColumn Header="Product Name" Binding="{Binding Product.Name}"/>
-                        <DataGridTextColumn Header="Description" Binding="{Binding Product.Description}"/>
-                        <DataGridTextColumn Header="Category" Binding="{Binding Product.Category}"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Product.Price}"/>
-                        <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Bottom" Margin="5">
+                        <Run Text="Order Total:" Foreground="Black"/>
+                        <Run Text="{Binding Order.Total, Mode=OneWay, StringFormat=C}" Foreground="DarkRed" FontSize="14" FontWeight="Bold"/>
+                    </TextBlock>
+
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Order.Items}" IsReadOnly="True" Margin="5" 
+                              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Item ID" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="Product ID" Binding="{Binding Product.Id}"/>
+                            <DataGridTextColumn Header="Product Name" Binding="{Binding Product.Name}"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding Product.Description}"/>
+                            <DataGridTextColumn Header="Category" Binding="{Binding Product.Category}"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Product.Price}"/>
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
+                            <DataGridTextColumn Header="Total" Binding="{Binding Total, Mode=OneWay}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
             </GroupBox>
         </DockPanel>
     </Grid>

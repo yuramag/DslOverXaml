@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DslOverXamlDemo.Model;
 
-namespace DslOverXamlDemo.Engine
+namespace DslOverXamlDemo.Engine.OrderProcessing
 {
     public static class DiscountLogic
     {
