@@ -51,7 +51,6 @@
     <Compile Include="Model\ModelMetadataManager.cs" />
     <Compile Include="Model\ModelType.cs" />
     <Compile Include="Model\RuleModelFactory.cs" />
-    <Compile Include="Model\RuleSectionsTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\Conditions\AllMatchViewModel.cs" />
@@ -70,8 +69,8 @@
     <Compile Include="ViewModel\RuleDesigner.cs" />
     <Compile Include="ViewModel\Rules\DomainSpecific\ValueBasedRuleViewModel.cs" />
     <Compile Include="ViewModel\Values\ConstantViewModel.cs" />
-    <Compile Include="ViewModel\Values\ProductClearancePercentViewModel.cs" />
-    <Compile Include="ViewModel\Values\ProductTodaysPriceViewModel.cs" />
+    <Compile Include="ViewModel\Values\DomainSpecific\ProductClearancePercentViewModel.cs" />
+    <Compile Include="ViewModel\Values\DomainSpecific\ProductTodaysPriceViewModel.cs" />
     <Compile Include="ViewModel\Values\ValueBaseViewModel.cs" />
     <Compile Include="ViewModel\Rules\DomainSpecific\ApplyAbsoluteDiscountViewModel.cs" />
     <Compile Include="ViewModel\Rules\DomainSpecific\ApplyAdditiveDiscountViewModel.cs" />
