@@ -47,6 +47,7 @@
     <Compile Include="Controls\EditableTextBoxControl.xaml.cs">
       <DependentUpon>EditableTextBoxControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Gadget.cs" />
     <Compile Include="Model\ModelMetadata.cs" />
     <Compile Include="Model\ModelMetadataManager.cs" />
     <Compile Include="Model\ModelType.cs" />

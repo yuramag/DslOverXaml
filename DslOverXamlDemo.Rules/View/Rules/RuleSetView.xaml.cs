@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace DslOverXamlDemo.Rules.View
+﻿namespace DslOverXamlDemo.Rules.View
 {
-    public partial class RuleSetView : UserControl
+    public partial class RuleSetView
     {
         public RuleSetView()
         {

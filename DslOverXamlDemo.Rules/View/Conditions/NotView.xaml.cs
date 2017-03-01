@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace DslOverXamlDemo.Rules.View
+﻿namespace DslOverXamlDemo.Rules.View
 {
-    public partial class NotView : UserControl
+    public partial class NotView
     {
         public NotView()
         {

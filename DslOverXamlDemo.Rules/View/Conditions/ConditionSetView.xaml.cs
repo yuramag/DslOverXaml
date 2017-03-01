@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace DslOverXamlDemo.Rules.View
+﻿namespace DslOverXamlDemo.Rules.View
 {
-    public partial class ConditionSetView : UserControl
+    public partial class ConditionSetView
     {
         public ConditionSetView()
         {
