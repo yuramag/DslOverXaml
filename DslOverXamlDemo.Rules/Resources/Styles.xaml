@@ -1,15 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:DslOverXamlDemo.Rules.Controls">
+                    xmlns:controls="clr-namespace:DslOverXamlDemo.Rules.Controls"
+                    xmlns:converters="clr-namespace:DslOverXamlDemo.Contracts.Converters;assembly=DslOverXamlDemo.Contracts">
 
-    <Brush x:Key="RuleBorderBrush">Silver</Brush>
-    <Brush x:Key="RuleTitleBrush">Black</Brush>
-
-    <Brush x:Key="ConditionBorderBrush">LightBlue</Brush>
-    <Brush x:Key="ConditionTitleBrush">Black</Brush>
-
-    <Brush x:Key="ValueBorderBrush">LightSteelBlue</Brush>
-    <Brush x:Key="ValueTitleBrush">Black</Brush>
+    <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+    <converters:EqulityToVisibilityConverter x:Key="IsNullVisibilityConverter" Value="{x:Null}"/>
+    <converters:InequalityToVisibilityConverter x:Key="IsNotNullVisibilityConverter" Value="{x:Null}"/>
+    <converters:BoolToIntConverter x:Key="BoolToIntConverter"/>
+    <converters:InverseBoolToIntConverter x:Key="InverseBoolToIntConverter"/>
 
     <Style x:Key="FlatButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
         <Setter Property="Cursor" Value="Hand"/>

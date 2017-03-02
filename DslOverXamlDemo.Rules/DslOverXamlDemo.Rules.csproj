@@ -48,6 +48,7 @@
       <DependentUpon>EditableTextBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Gadget.cs" />
+    <Compile Include="Controls\GadgetType.cs" />
     <Compile Include="Model\ModelMetadata.cs" />
     <Compile Include="Model\ModelMetadataManager.cs" />
     <Compile Include="Model\ModelType.cs" />
@@ -101,7 +102,7 @@
     <Compile Include="View\Conditions\EmptyConditionView.xaml.cs">
       <DependentUpon>EmptyConditionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\SuperProperties.cs" />
+    <Compile Include="Controls\SuperProperties.cs" />
     <Compile Include="View\Rules\ConditionRuleView.xaml.cs">
       <DependentUpon>ConditionRuleView.xaml</DependentUpon>
     </Compile>
@@ -142,6 +143,10 @@
     <Page Include="Resources\Templates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Conditions\ConditionBaseView.xaml">
       <Generator>MSBuild:Compile</Generator>
