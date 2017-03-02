@@ -84,52 +84,7 @@
     <Compile Include="Model\ModelBindingAttribute.cs" />
     <Compile Include="ViewModel\Rules\RuleBaseViewModel.cs" />
     <Compile Include="ViewModel\Rules\RuleSetViewModel.cs" />
-    <Compile Include="View\Conditions\ConditionBaseView.xaml.cs">
-      <DependentUpon>ConditionBaseView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Conditions\DomainSpecific\ProductCategoryView.xaml.cs">
-      <DependentUpon>ProductCategoryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Conditions\DomainSpecific\RangeConditionView.xaml.cs">
-      <DependentUpon>RangeConditionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Conditions\NotView.xaml.cs">
-      <DependentUpon>NotView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Conditions\ConditionSetView.xaml.cs">
-      <DependentUpon>ConditionSetView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Conditions\EmptyConditionView.xaml.cs">
-      <DependentUpon>EmptyConditionView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\SuperProperties.cs" />
-    <Compile Include="View\Rules\ConditionRuleView.xaml.cs">
-      <DependentUpon>ConditionRuleView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Rules\DomainSpecific\ValueBasedRuleView.xaml.cs">
-      <DependentUpon>ValueBasedRuleView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Rules\RuleBaseView.xaml.cs">
-      <DependentUpon>RuleBaseView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Rules\EmptyRuleView.xaml.cs">
-      <DependentUpon>EmptyRuleView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Rules\RuleSetView.xaml.cs">
-      <DependentUpon>RuleSetView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\RuleDesignerView.xaml.cs">
-      <DependentUpon>RuleDesignerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Values\ConstantView.xaml.cs">
-      <DependentUpon>ConstantView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Values\DomainSpecific\ProductClearancePercentView.xaml.cs">
-      <DependentUpon>ProductClearancePercentView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Values\ValueBaseView.xaml.cs">
-      <DependentUpon>ValueBaseView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\EditableTextBoxControl.xaml">
@@ -147,66 +102,6 @@
     <Page Include="Themes\generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Conditions\ConditionBaseView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Conditions\DomainSpecific\ProductCategoryView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Conditions\DomainSpecific\RangeConditionView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Conditions\NotView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Conditions\ConditionSetView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Conditions\EmptyConditionView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Rules\ConditionRuleView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Rules\DomainSpecific\ValueBasedRuleView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Rules\RuleBaseView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Rules\EmptyRuleView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Rules\RuleSetView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\RuleDesignerView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Values\ConstantView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Values\DomainSpecific\ProductClearancePercentView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Values\ValueBaseView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
