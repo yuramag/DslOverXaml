@@ -22,12 +22,12 @@ namespace DslOverXamlDemo.Interface
             return sb.ToString().Replace($" xmlns=\"{defaultNamespace ?? NamespaceDefinition.DefaultNamespace}\"", null);
         }
 
-        public static T FromXaml<T>(string xml)
+        public static T FromXaml<T>(string xml, string defaultNamespace = null)
         {
             if (string.IsNullOrWhiteSpace(xml))
                 return default(T);
             var node = XElement.Parse(xml);
-            SetDefaultXmlNamespace(node, $"clr-namespace:{typeof(T).Namespace};assembly={typeof(T).Assembly.GetName()}");
+            SetDefaultXmlNamespace(node, defaultNamespace ?? NamespaceDefinition.DefaultNamespace);
             return (T) XamlServices.Load(node.CreateReader());
         }
 

@@ -246,7 +246,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:NotViewModel}">
-        <controls:Gadget>
+        <controls:Gadget GadgetType="Condition">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Visibility="{Binding Condition.HasValue, Converter={StaticResource InverseBoolToVisibilityConverter}}">
                     <ItemsControl Style="{StaticResource RulesToolBar}">

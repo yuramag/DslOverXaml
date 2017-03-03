@@ -84,7 +84,6 @@
     <Compile Include="Model\ModelBindingAttribute.cs" />
     <Compile Include="ViewModel\Rules\RuleBaseViewModel.cs" />
     <Compile Include="ViewModel\Rules\RuleSetViewModel.cs" />
-    <Compile Include="Controls\SuperProperties.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\EditableTextBoxControl.xaml">

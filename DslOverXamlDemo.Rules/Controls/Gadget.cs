@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace DslOverXamlDemo.Rules.Controls
 {
@@ -52,7 +51,7 @@ namespace DslOverXamlDemo.Rules.Controls
 
         public static readonly DependencyProperty GadgetTypeProperty =
             DependencyProperty.RegisterAttached("GadgetType", typeof(GadgetType), typeof(Gadget),
-                new FrameworkPropertyMetadata(default(GadgetType), FrameworkPropertyMetadataOptions.Inherits));
+                new FrameworkPropertyMetadata(default(GadgetType)));
 
         public static GadgetType GetGadgetType(DependencyObject obj)
         {
