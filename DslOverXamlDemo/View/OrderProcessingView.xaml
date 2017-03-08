@@ -13,7 +13,7 @@
         </Style>
 
         <DataTemplate x:Key="DiscountItems" DataType="{x:Type model:OrderDiscount}">
-            <ItemsControl Style="{StaticResource ToolBarStyle}">
+            <ItemsControl Style="{StaticResource RulesToolBar}">
                 <TextBlock Text="ID:"/>
                 <TextBlock Text="{Binding OrderItemId, StringFormat='[{0}]'}"/>
                 <TextBlock Text="{Binding DiscountType}"/>
@@ -35,11 +35,11 @@
         <DockPanel Grid.Row="1" Grid.Column="0">
             <GroupBox DockPanel.Dock="Right" Header="Processing" Margin="5">
                 <StackPanel>
-                    <ItemsControl Style="{StaticResource ToolBarStyle}">
+                    <ItemsControl Style="{StaticResource RulesToolBar}">
                         <Button Content="Process Order" Command="{Binding ProcessCommand}"/>
                     </ItemsControl>
                     <StackPanel>
-                        <ItemsControl Style="{StaticResource ToolBarStyle}">
+                        <ItemsControl Style="{StaticResource RulesToolBar}">
                             <TextBlock Text="Total Amount:"/>
                             <TextBlock Text="{Binding Total, Mode=OneWay, StringFormat=C}" Foreground="DarkRed" FontSize="14" FontWeight="Bold"/>
                         </ItemsControl>
@@ -51,7 +51,7 @@
             <StackPanel DockPanel.Dock="Top">
                 <GroupBox Header="Order" Margin="5">
                     <StackPanel>
-                        <ItemsControl Style="{StaticResource ToolBarStyle}">
+                        <ItemsControl Style="{StaticResource RulesToolBar}">
                             <TextBlock Text="ID:"/>
                             <TextBox Text="{Binding Order.Id}" IsReadOnly="True" MinWidth="50"/>
 
@@ -69,7 +69,7 @@
                 </GroupBox>
                 <GroupBox Header="Customer" Margin="5">
                     <StackPanel>
-                        <ItemsControl Style="{StaticResource ToolBarStyle}">
+                        <ItemsControl Style="{StaticResource RulesToolBar}">
                             <TextBlock Text="ID:"/>
                             <TextBox Text="{Binding Order.Customer.Id}" IsReadOnly="True" MinWidth="50"/>
 

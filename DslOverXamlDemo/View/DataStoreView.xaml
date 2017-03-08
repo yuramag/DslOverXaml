@@ -55,13 +55,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ItemsControl Grid.Row="0" Style="{StaticResource ToolBarStyle}" Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+        <ItemsControl Grid.Row="0" Style="{StaticResource RulesToolBar}" Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}">
             <Button Content="Edit" Command="{Binding ToggleEditModeCommand}"/>
             <Button Content="Load Default" Command="{Binding LoadDefaultCommand}"/>
             <Button Content="Save" Command="{Binding SaveCommand}" IsEnabled="{Binding IsModified}"/>
         </ItemsControl>
 
-        <ItemsControl Grid.Row="0" Style="{StaticResource ToolBarStyle}" Visibility="{Binding IsInEditMode, Converter={StaticResource BoolToVisibilityConverter}}">
+        <ItemsControl Grid.Row="0" Style="{StaticResource RulesToolBar}" Visibility="{Binding IsInEditMode, Converter={StaticResource BoolToVisibilityConverter}}">
             <Button Content="Apply" Command="{Binding ApplyCommand}"/>
             <Button Content="Cancel" Command="{Binding ToggleEditModeCommand}"/>
         </ItemsControl>

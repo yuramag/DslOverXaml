@@ -5,13 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:DslOverXamlDemo.ViewModel"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:rules="clr-namespace:DslOverXamlDemo.Rules.Model;assembly=DslOverXamlDemo.Rules"
-             xmlns:controls="clr-namespace:DslOverXamlDemo.Rules.Controls;assembly=DslOverXamlDemo.Rules"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="600"
              d:DataContext="{d:DesignInstance {x:Type vm:SampleRuleViewModel}}">
     <UserControl.Resources>
         <DataTemplate x:Key="RuleViewTemplate">
-            <TextBox AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" FontFamily="Consolas">
+            <TextBox AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" FontFamily="Consolas" BorderThickness="0">
                 <TextBox.InputBindings>
                     <MouseBinding Gesture="Ctrl+LeftClick" Command="{Binding SetEditModeCommand}">
                         <MouseBinding.CommandParameter>
@@ -51,44 +49,38 @@
             </TextBox>
         </DataTemplate>
     </UserControl.Resources>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
-            <StackPanel Orientation="Horizontal">
-                <ItemsControl Style="{StaticResource ToolBarStyle}" Margin="0,5" Visibility="{Binding IsXmlView, Converter={StaticResource BoolToVisibilityConverter}}">
-                    <Button Content="Edit" Command="{Binding ToggleEditModeCommand}" Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
-                    <Button Content="Apply" Command="{Binding ApplyEditTextCommand}" Visibility="{Binding IsInEditMode, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    <Button Content="Cancel" Command="{Binding ToggleEditModeCommand}" Visibility="{Binding IsInEditMode, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                </ItemsControl>
-                <ItemsControl Style="{StaticResource ToolBarStyle}" Margin="0,5" Visibility="{Binding IsGraphChangedOrInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                    <Button Content="Load Default" Command="{Binding LoadDefaultCommand}" Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
-                    <Button Content="Save" Command="{Binding SaveCommand}" IsEnabled="{Binding IsModified}" Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
-                </ItemsControl>
-                <ItemsControl Style="{StaticResource ToolBarStyle}" Margin="0,5" Visibility="{Binding IsXmlView, Converter={StaticResource InverseBoolToVisibilityConverter}}">
-                    <!--<CheckBox Content="Auto" IsChecked="{Binding IsAutoApply}" Margin="0,3,0,0"/>-->
-                    <Button Content="Apply" Command="{Binding ApplyGraphCommand}" Visibility="{Binding IsGraphChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                </ItemsControl>
-            </StackPanel>
-        </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <TabControl SelectedValuePath="Tag" SelectedValue="{Binding TabItem}">
-            <TabItem Header="As XAML" Tag="{x:Static vm:CurrentTabItem.XmlView}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <ItemsControl DockPanel.Dock="Top" Style="{StaticResource ToolBarStyle}">
-                        </ItemsControl>
-                    </StackPanel>
-                    
-                    <ContentPresenter Grid.Row="1" Content="{Binding}" ContentTemplate="{StaticResource RuleViewTemplate}"/>
-                </Grid>
-            </TabItem>
-
-            <TabItem Header="Designer" Tag="{x:Static vm:CurrentTabItem.GraphView}">
+        <DockPanel Grid.Column="0">
+            <ItemsControl DockPanel.Dock="Top" Style="{StaticResource RulesToolBar}">
+                <Button Content="Load Default" Command="{Binding LoadDefaultCommand}"/>
+                <Button Content="Save" Command="{Binding SaveCommand}"/>
+                <Button Content="Apply" Command="{Binding ApplyGraphCommand}"/>
+                <Button Content="Revert" Command="{Binding RevertGraphCommand}"/>
+                <CheckBox IsChecked="{Binding IsAutoApply}" Content="Auto Apply" Focusable="False"/>
+            </ItemsControl>
+            <Border Style="{StaticResource RoundedBorderStyle}">
                 <ContentPresenter Content="{Binding Designer}" />
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+            </Border>
+        </DockPanel>
+
+        <GridSplitter Grid.Column="1" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+
+        <DockPanel Grid.Column="1" Margin="3,0,0,0">
+            <ItemsControl DockPanel.Dock="Top" Style="{StaticResource RulesToolBar}">
+                <Button Content="Edit" Command="{Binding ToggleEditModeCommand}" Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                <Button Content="Copy" Command="{Binding CopyCommand}" Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                <Button Content="Paste" Command="{Binding PasteCommand}" Visibility="{Binding IsInEditMode, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                <Button Content="Apply" Command="{Binding ApplyEditTextCommand}" Visibility="{Binding IsInEditMode, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <Button Content="Cancel" Command="{Binding ToggleEditModeCommand}" Visibility="{Binding IsInEditMode, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </ItemsControl>
+            <Border Style="{StaticResource RoundedBorderStyle}">
+                <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource RuleViewTemplate}"/>
+            </Border>
+        </DockPanel>
+    </Grid>
 </UserControl>

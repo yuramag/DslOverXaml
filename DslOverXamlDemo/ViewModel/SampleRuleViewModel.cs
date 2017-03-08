@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using DslOverXamlDemo.Contracts;
@@ -15,7 +16,19 @@ namespace DslOverXamlDemo.ViewModel
         public SampleRuleViewModel()
         {
             m_data = SimpleXamlSerializer.ToXaml(SampleRules.GetOrCreateSampleRule());
+
+            CopyCommand = new RelayCommand(() => Clipboard.SetText(Data), () => !string.IsNullOrEmpty(Data));
+            PasteCommand = new RelayCommand(() => Data = Clipboard.GetText(), Clipboard.ContainsText);
+            LoadDefaultCommand = new RelayCommand(() => LoadDefault());
+            ToggleEditModeCommand = new RelayCommand(() => IsInEditMode = !IsInEditMode);
+            SetEditModeCommand = new RelayCommand<bool>(x => IsInEditMode = x);
+            ApplyEditTextCommand = new RelayCommand(() => ApplyEditText());
+            ApplyGraphCommand = new RelayCommand(() => ApplyGraph(), () => IsGraphChanged);
+            RevertGraphCommand = new RelayCommand(() => Designer = null, () => IsGraphChanged);
+            SaveCommand = new RelayCommand(() => Save(), () => IsModified);
         }
+
+        private bool m_isAutoApplyMode;
 
         private string m_data;
 
@@ -29,11 +42,13 @@ namespace DslOverXamlDemo.ViewModel
                     m_data = value;
                     m_asText = null;
                     m_asXaml = null;
-                    m_designer = null;
                     NotifyOfPropertyChange(() => AsXaml);
                     NotifyOfPropertyChange(() => AsText);
-                    NotifyOfPropertyChange(() => Designer);
                     NotifyOfPropertyChange(() => Data);
+
+                    if (!m_isAutoApplyMode)
+                        Designer = null;
+
                     IsInEditMode = false;
                     Changed();
                 }
@@ -80,7 +95,7 @@ namespace DslOverXamlDemo.ViewModel
                     try
                     {
                         m_designer = new RuleDesigner(AsText);
-                        m_designer.OnModified += (sender, args) => IsGraphChanged = true;
+                        m_designer.OnModified += GraphChanged;
                     }
                     catch (Exception ex)
                     {
@@ -89,6 +104,22 @@ namespace DslOverXamlDemo.ViewModel
                 }
                 return m_designer;
             }
+            set
+            {
+                if (m_designer != value)
+                {
+                    if (m_designer != null)
+                        m_designer.OnModified -= GraphChanged;
+                    m_designer = value;
+                    NotifyOfPropertyChange(() => Designer);
+                    IsGraphChanged = false;
+                }
+            }
+        }
+
+        private void GraphChanged(object sender, EventArgs args)
+        {
+            IsGraphChanged = true;
         }
 
         private bool m_isGraphChanged;
@@ -103,14 +134,13 @@ namespace DslOverXamlDemo.ViewModel
                     m_isGraphChanged = value;
                     NotifyOfPropertyChange(() => IsGraphChanged);
                     NotifyOfPropertyChange(() => Designer);
-                    NotifyOfPropertyChange(() => IsGraphChangedOrInEditMode);
                     if (IsAutoApply)
-                        ApplyGraph();
+                        ApplyGraph(true);
                 }
             }
         }
 
-        private bool m_isAutoApply;
+        private bool m_isAutoApply = true;
 
         public bool IsAutoApply
         {
@@ -139,12 +169,9 @@ namespace DslOverXamlDemo.ViewModel
                     m_isInEditMode = value;
                     EditText = value ? AsText : null;
                     NotifyOfPropertyChange(() => IsInEditMode);
-                    NotifyOfPropertyChange(() => IsGraphChangedOrInEditMode);
                 }
             }
         }
-
-        public bool IsGraphChangedOrInEditMode => IsGraphChanged || IsInEditMode;
 
         private string m_editText;
 
@@ -161,47 +188,15 @@ namespace DslOverXamlDemo.ViewModel
             }
         }
 
-        private CurrentTabItem m_tabItem;
-
-        public CurrentTabItem TabItem
-        {
-            get { return m_tabItem; }
-            set
-            {
-                if (m_tabItem != value)
-                {
-                    m_tabItem = value;
-                    NotifyOfPropertyChange(() => TabItem);
-                    NotifyOfPropertyChange(() => IsXmlView);
-                }
-            }
-        }
-
-        public bool IsXmlView => TabItem == CurrentTabItem.XmlView;
-
-        private ICommand m_loadDefaultCommand;
-
-        public ICommand LoadDefaultCommand => m_loadDefaultCommand ?? (m_loadDefaultCommand = new RelayCommand(() => LoadDefault()));
-
-        private ICommand m_toggleEditModeCommand;
-
-        public ICommand ToggleEditModeCommand => m_toggleEditModeCommand ?? (m_toggleEditModeCommand = new RelayCommand(() => IsInEditMode = !IsInEditMode));
-
-        private ICommand m_setEditModeCommand;
-
-        public ICommand SetEditModeCommand => m_setEditModeCommand ?? (m_setEditModeCommand = new RelayCommand<bool>(b => IsInEditMode = b));
-
-        private ICommand m_applyEditTextCommand;
-
-        public ICommand ApplyEditTextCommand => m_applyEditTextCommand ?? (m_applyEditTextCommand = new RelayCommand(() => ApplyEditText()));
-
-        private ICommand m_applyGraphCommand;
-
-        public ICommand ApplyGraphCommand => m_applyGraphCommand ?? (m_applyGraphCommand = new RelayCommand(() => ApplyGraph(), () => IsGraphChanged));
-
-        private ICommand m_saveCommand;
-
-        public ICommand SaveCommand => m_saveCommand ?? (m_saveCommand = new RelayCommand(() => Save(), () => IsModified));
+        public ICommand CopyCommand { get; }
+        public ICommand PasteCommand { get; }
+        public ICommand LoadDefaultCommand { get; }
+        public ICommand ToggleEditModeCommand { get; }
+        public ICommand SetEditModeCommand { get; }
+        public ICommand ApplyEditTextCommand { get; }
+        public ICommand ApplyGraphCommand { get; }
+        public ICommand RevertGraphCommand { get; }
+        public ICommand SaveCommand { get; }
 
         private void LoadDefault()
         {
@@ -219,12 +214,21 @@ namespace DslOverXamlDemo.ViewModel
             }
         }
 
-        public void ApplyGraph()
+        public void ApplyGraph(bool isAutoApply = false)
         {
-            if (m_designer == null || !IsGraphChanged)
+            if(m_designer == null || !IsGraphChanged)
                 return;
 
-            AsText = SimpleXamlSerializer.ToXaml(Designer.Model.Value);
+            m_isAutoApplyMode = isAutoApply;
+            try
+            {
+                AsText = SimpleXamlSerializer.ToXaml(Designer.Model.Value);
+            }
+            finally
+            {
+                m_isAutoApplyMode = false;
+            }
+
             IsInEditMode = false;
             IsGraphChanged = false;
             Changed();
@@ -238,11 +242,5 @@ namespace DslOverXamlDemo.ViewModel
             LogInfo("Rule definition has been saved successfully.");
             EventAggregator.Instance.Publish(new ApplicationEvents.SettingsRefreshed());
         }
-    }
-
-    public enum CurrentTabItem
-    {
-        XmlView,
-        GraphView
     }
 }

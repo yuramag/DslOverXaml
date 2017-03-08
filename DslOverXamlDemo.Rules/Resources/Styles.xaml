@@ -34,7 +34,7 @@
         <Setter Property="ToolTip" Value="Remove"/>
     </Style>
 
-    <Style x:Key="RulesToolBarBase" TargetType="{x:Type ItemsControl}">
+    <Style x:Key="RulesToolBar" TargetType="{x:Type ItemsControl}">
         <Style.Resources>
             <Style TargetType="{x:Type Button}">
                 <Setter Property="Margin" Value="2"/>
@@ -49,7 +49,15 @@
             </Style>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Margin" Value="4,0"/>
-                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="Gray"/>
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontFamily" Value="Segoe UI, Lucida Sans Unicode, Verdana" />
+            </Style>
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Margin" Value="5,0" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontFamily" Value="Segoe UI, Lucida Sans Unicode, Verdana" />
                 <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
             <Style TargetType="{x:Type Menu}">
@@ -75,6 +83,7 @@
                 <Setter Property="FontFamily" Value="Segoe UI, Lucida Sans Unicode, Verdana" />
             </Style>
         </Style.Resources>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="4"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="ItemsPanel">
@@ -84,10 +93,6 @@
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <Style x:Key="RulesToolBar" TargetType="{x:Type ItemsControl}" BasedOn="{StaticResource RulesToolBarBase}">
-        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <DataTemplate x:Key="ModelsMenuItemsStyle" DataType="{x:Type MenuItem}">
