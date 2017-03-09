@@ -58,8 +58,7 @@ namespace DslOverXamlDemo.Interface
         {
             get
             {
-                decimal result;
-                return !VariableConverter.TryConvertFrom(Value, out result) ? default(decimal?) : result;
+                return !VariableConverter.TryConvertFrom(Value, out decimal result) ? default(decimal?) : result;
             }
         }
 
@@ -71,8 +70,7 @@ namespace DslOverXamlDemo.Interface
         {
             get
             {
-                double result;
-                return !VariableConverter.TryConvertFrom(Value, out result) ? default(double?) : result;
+                return !VariableConverter.TryConvertFrom(Value, out double result) ? default(double?) : result;
             }
         }
 
@@ -84,8 +82,7 @@ namespace DslOverXamlDemo.Interface
         {
             get
             {
-                int result;
-                return !VariableConverter.TryConvertFrom(Value, out result) ? default(int?) : result;
+                return !VariableConverter.TryConvertFrom(Value, out int result) ? default(int?) : result;
             }
         }
 
@@ -97,8 +94,7 @@ namespace DslOverXamlDemo.Interface
         {
             get
             {
-                string result;
-                return !VariableConverter.TryConvertFrom(Value, out result) ? default(string) : result;
+                return !VariableConverter.TryConvertFrom(Value, out string result) ? default(string) : result;
             }
         }
 

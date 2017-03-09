@@ -49,6 +49,14 @@
         <controls:Gadget GadgetType="Rule"/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:BreakViewModel}">
+        <controls:Gadget GadgetType="Rule"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:StopViewModel}">
+        <controls:Gadget GadgetType="Rule"/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:RuleSetViewModel}">
         <controls:Gadget GadgetType="Rule">
             <DockPanel>

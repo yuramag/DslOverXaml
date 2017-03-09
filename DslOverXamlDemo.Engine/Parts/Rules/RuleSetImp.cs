@@ -15,8 +15,16 @@ namespace DslOverXamlDemo.Engine.Parts
 
         public override async Task ExecuteAsync(IContext context)
         {
-            foreach (var rule in Rules ?? Enumerable.Empty<RuleImp>())
-                await rule.ExecuteAsync(context);
+            var executionControl = context.GetService<IExecutionControlService>();
+            using (executionControl.CreateExecutionScope())
+            {
+                foreach (var rule in Rules ?? Enumerable.Empty<RuleImp>())
+                {
+                    if (executionControl.IsStopRequested || executionControl.CurrentScope.IsBreakRequested)
+                        break;
+                    await rule.ExecuteAsync(context);
+                }
+            }
         }
 
         public override string ToString()

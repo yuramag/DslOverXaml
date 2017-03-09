@@ -16,6 +16,22 @@ namespace DslOverXamlDemo.Engine.Utils
             };
         }
 
+        protected override RuleImp VisitRuleElement(Break info)
+        {
+            return new BreakImp
+            {
+                Name = info.Name
+            };
+        }
+
+        protected override RuleImp VisitRuleElement(Stop info)
+        {
+            return new StopImp
+            {
+                Name = info.Name
+            };
+        }
+
         protected override RuleImp VisitRuleElement(ConditionRule info)
         {
             return new ConditionRuleImp

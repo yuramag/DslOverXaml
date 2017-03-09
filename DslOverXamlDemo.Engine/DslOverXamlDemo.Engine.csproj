@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DslOverXamlDemo.Engine</RootNamespace>
     <AssemblyName>DslOverXamlDemo.Engine</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,9 @@
     <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\ExecutionControlService.cs" />
+    <Compile Include="Engine\IExecutionControlService.cs" />
+    <Compile Include="Engine\IExecutionScope.cs" />
     <Compile Include="OrderProcessing\DataRepository.cs" />
     <Compile Include="Engine\Context.cs" />
     <Compile Include="Engine\ContextExtensions.cs" />
@@ -42,6 +46,8 @@
     <Compile Include="OrderProcessing\DiscountsContainerService.cs" />
     <Compile Include="OrderProcessing\OrderDiscountContext.cs" />
     <Compile Include="OrderProcessing\OrderStateService.cs" />
+    <Compile Include="Parts\Rules\BreakImp.cs" />
+    <Compile Include="Parts\Rules\StopImp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parts\Rules\ApplyPercentDiscountImp.cs" />
     <Compile Include="Parts\Rules\ApplyAbsoluteDiscountImp.cs" />
@@ -74,6 +80,7 @@
     <Compile Include="Utils\Helper.cs" />
     <Compile Include="Utils\RuleBuilder.cs" />
     <Compile Include="Utils\RuleBuildingVisitor.cs" />
+    <Compile Include="Utils\RuleExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DslOverXamlDemo.Interface\DslOverXamlDemo.Interface.csproj">

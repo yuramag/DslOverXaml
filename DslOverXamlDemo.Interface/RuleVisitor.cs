@@ -33,6 +33,16 @@ namespace DslOverXamlDemo.Interface
             throw new NotSupportedException();
         }
 
+        protected virtual TR VisitRuleElement(Break info)
+        {
+            throw new NotSupportedException();
+        }
+
+        protected virtual TR VisitRuleElement(Stop info)
+        {
+            throw new NotSupportedException();
+        }
+
         protected virtual TR VisitRuleElement(ConditionRule info)
         {
             throw new NotSupportedException();

@@ -3,13 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DslOverXamlDemo"
         xmlns:vm="clr-namespace:DslOverXamlDemo.ViewModel"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="600" 
         d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
         WindowStartupLocation="CenterScreen"
-        Title="DSL over XAML Demo - Order Processing Engine" Height="600" Width="800" Closing="Window_Closing">
+        Title="DSL over XAML Demo - Order Processing Engine" Height="700" Width="900" Closing="Window_Closing">
     <Window.Resources>
         
     </Window.Resources>

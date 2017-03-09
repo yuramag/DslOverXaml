@@ -17,6 +17,14 @@ namespace DslOverXamlDemo.Interface
     {
     }
 
+    public sealed class Break : Rule
+    {
+    }
+
+    public sealed class Stop : Rule
+    {
+    }
+
     [ContentProperty("Rule")]
     [DefaultProperty("Rule")]
     public sealed class ConditionRule : Rule

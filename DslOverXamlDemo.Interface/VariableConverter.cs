@@ -64,8 +64,7 @@ namespace DslOverXamlDemo.Interface
 
         public static DateTime ParseDateTime(string value)
         {
-            DateTime result;
-            if (!TryParseDateTime(value, out result))
+            if (!TryParseDateTime(value, out DateTime result))
                 throw new FormatException(string.Format("{0} does not contain a valid string representation of a date and time", value));
             return result;
         }
@@ -79,26 +78,22 @@ namespace DslOverXamlDemo.Interface
 
         public static DateTime? ParseDateTimeOrNull(string value)
         {
-            DateTime result;
-            return !TryParseDateTime(value, out result) ? default(DateTime?) : result;
+            return !TryParseDateTime(value, out DateTime result) ? default(DateTime?) : result;
         }
 
         public static int? ParseIntOrNull(string value)
         {
-            int result;
-            return !int.TryParse(value, out result) ? default(int?) : result;
+            return !int.TryParse(value, out int result) ? default(int?) : result;
         }
 
         public static decimal? ParseDecimalOrNull(string value)
         {
-            decimal result;
-            return !decimal.TryParse(value, out result) ? default(decimal?) : result;
+            return !decimal.TryParse(value, out decimal result) ? default(decimal?) : result;
         }
 
         public static bool? ParseBoolOrNull(string value)
         {
-            bool result;
-            if (bool.TryParse(value, out result))
+            if (bool.TryParse(value, out bool result))
                 return result;
 
             switch ((value ?? string.Empty).ToUpperInvariant())

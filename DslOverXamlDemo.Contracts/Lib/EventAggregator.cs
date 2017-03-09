@@ -21,9 +21,8 @@ namespace DslOverXamlDemo.Contracts.Lib
 
         public IObservable<T> GetEventStream<T>()
         {
-            Tuple<object, object> tuple;
 
-            if (m_observables.TryGetValue(typeof(T), out tuple))
+            if (m_observables.TryGetValue(typeof(T), out Tuple<object, object> tuple))
                 return (IObservable<T>)tuple.Item2;
 
             var subject = new Subject<T>();
@@ -42,8 +41,7 @@ namespace DslOverXamlDemo.Contracts.Lib
 
         public void Publish<T>(T payload)
         {
-            Tuple<object, object> tuple;
-            if (m_observables.TryGetValue(typeof(T), out tuple))
+            if (m_observables.TryGetValue(typeof(T), out Tuple<object, object> tuple))
                 ((ISubject<T>)tuple.Item1).OnNext(payload);
         }
     }

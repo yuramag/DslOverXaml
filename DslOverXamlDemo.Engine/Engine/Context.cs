@@ -6,6 +6,12 @@ namespace DslOverXamlDemo.Engine
     public class Context : IContext
     {
         private readonly Dictionary<Type, Func<object>> m_services = new Dictionary<Type, Func<object>>();
+        private readonly IExecutionControlService m_executionControlService = new ExecutionControlService();
+
+        public Context()
+        {
+            AddService(typeof(IExecutionControlService), () => m_executionControlService);
+        }
 
         public void AddService(Type type, Func<object> factory)
         {
@@ -19,8 +25,7 @@ namespace DslOverXamlDemo.Engine
 
         public object GetService(Type type)
         {
-            Func<object> factory;
-            if (!m_services.TryGetValue(type, out factory))
+            if (!m_services.TryGetValue(type, out Func<object> factory))
                 throw new InvalidOperationException($"Service of type '{type.Name}' not found");
             return factory();
         }

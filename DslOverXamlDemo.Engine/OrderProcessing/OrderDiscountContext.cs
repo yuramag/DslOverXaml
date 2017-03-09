@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DslOverXamlDemo.Engine.Parts;
+using DslOverXamlDemo.Engine.Utils;
 using DslOverXamlDemo.Model;
 
 namespace DslOverXamlDemo.Engine.OrderProcessing
@@ -21,7 +22,7 @@ namespace DslOverXamlDemo.Engine.OrderProcessing
             foreach (var item in Order.Items)
             {
                 this.GetService<OrderStateService>().CurrentOrderItem = item;
-                await rule.ExecuteAsync(this);
+                await RuleExecutor.ExecuteAsync(this, rule);
             }
         }
 

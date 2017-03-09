@@ -35,8 +35,7 @@ namespace DslOverXamlDemo.Rules.Model
 
         public static ModelMetadata GetModelMetadata(Type type)
         {
-            ModelMetadata result;
-            return s_modelBindings.TryGetValue(type, out result) ? result : null;
+            return s_modelBindings.TryGetValue(type, out ModelMetadata result) ? result : null;
         }
 
         public static ModelMetadata GetModelMetadata<T>()
