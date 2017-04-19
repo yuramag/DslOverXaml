@@ -1,9 +1,21 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:DslOverXamlDemo.Rules.Controls"
-                    xmlns:converters="clr-namespace:DslOverXamlDemo.Contracts.Converters;assembly=DslOverXamlDemo.Contracts">
+                    xmlns:converters="clr-namespace:DslOverXamlDemo.Contracts.Converters;assembly=DslOverXamlDemo.Contracts"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <converters:InequalityToVisibilityConverter x:Key="IsNotNullVisibilityConverter" Value="{x:Null}"/>
+    <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+    <converters:GenericEqulityConverter x:Key="VisibilityToCaptionConverter" TrueResult="+" FalseResult="-">
+        <converters:GenericEqulityConverter.Value>
+            <system:Boolean>True</system:Boolean>
+        </converters:GenericEqulityConverter.Value>
+    </converters:GenericEqulityConverter>
+    <converters:GenericEqulityConverter x:Key="VisibilityToToolTipConverter" TrueResult="Expand" FalseResult="Collapse">
+        <converters:GenericEqulityConverter.Value>
+            <system:Boolean>True</system:Boolean>
+        </converters:GenericEqulityConverter.Value>
+    </converters:GenericEqulityConverter>
 
     <Style x:Key="FlatCloseButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
         <Setter Property="Cursor" Value="Hand"/>
@@ -15,7 +27,6 @@
         <Setter Property="Content" Value="x"/>
         <Setter Property="Width" Value="16"/>
         <Setter Property="Height" Value="16"/>
-        <Setter Property="ToolTip" Value="Remove"/>
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -64,13 +75,19 @@
                     <Border Margin="5" CornerRadius="5" SnapsToDevicePixels="True" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Style="{StaticResource VisibilityAnimation}">
                         <DockPanel>
                             <DockPanel DockPanel.Dock="Top" Background="{TemplateBinding BorderBrush}" MinHeight="20">
-                                <Button DockPanel.Dock="Right" Style="{StaticResource FlatCloseButton}"
+                                <Button DockPanel.Dock="Right" Style="{StaticResource FlatCloseButton}" 
+                                        ToolTip="Remove"
                                         Visibility="{TemplateBinding Command, Converter={StaticResource IsNotNullVisibilityConverter}}"
                                         Command="{TemplateBinding Command}"
                                         CommandParameter="{TemplateBinding CommandParameter}"/>
+                                <Button DockPanel.Dock="Left" Style="{StaticResource FlatCloseButton}" 
+                                        ToolTip="{Binding IsCollapsed, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Gadget}}, Converter={StaticResource VisibilityToToolTipConverter}}"
+                                        Command="{Binding ToggleCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Gadget}}}"
+                                        Content="{Binding IsCollapsed, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Gadget}}, Converter={StaticResource VisibilityToCaptionConverter}}"/>
                                 <TextBlock Text="{Binding Description}" Margin="10,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" FontFamily="Consolas"/>
                             </DockPanel>
-                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                            <ContentPresenter Content="{TemplateBinding Content}" 
+                                              Visibility="{Binding IsCollapsed, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Gadget}}, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
                         </DockPanel>
                     </Border>
                 </ControlTemplate>

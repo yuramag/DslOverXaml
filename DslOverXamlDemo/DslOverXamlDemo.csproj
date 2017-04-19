@@ -85,14 +85,12 @@
     <Compile Include="Samples\SampleDataStore.cs" />
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="Samples\SampleRules.cs" />
-    <Compile Include="ViewModel\DataStoreViewModel.cs" />
     <Compile Include="ViewModel\LoggingViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\OrderItemViewModel.cs" />
     <Compile Include="ViewModel\OrderProcessingViewModel.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="ViewModel\SampleRuleViewModel.cs" />
-    <Compile Include="View\DataStoreView.xaml.cs">
-      <DependentUpon>DataStoreView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>
     </Compile>
@@ -119,10 +117,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Templates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\DataStoreView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

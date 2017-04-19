@@ -26,12 +26,12 @@ namespace DslOverXamlDemo.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SampleDataJson {
+        public string OrderDataJson {
             get {
-                return ((string)(this["SampleDataJson"]));
+                return ((string)(this["OrderDataJson"]));
             }
             set {
-                this["SampleDataJson"] = value;
+                this["OrderDataJson"] = value;
             }
         }
         

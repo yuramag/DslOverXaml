@@ -26,10 +26,6 @@
             <TabItem Header="Rule Definition">
                 <ContentControl Content="{Binding SampleRule}"/>
             </TabItem>
-
-            <TabItem Header="Sample Data">
-                <ContentControl Content="{Binding DataStore}"/>
-            </TabItem>
         </TabControl>
 
         <GridSplitter Grid.Row="1" Grid.Column="0" Height="3" HorizontalAlignment="Stretch" />

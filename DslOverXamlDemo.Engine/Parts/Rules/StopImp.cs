@@ -9,5 +9,10 @@ namespace DslOverXamlDemo.Engine.Parts
             context.GetService<IExecutionControlService>().Stop();
             return Task.CompletedTask;
         }
+
+        public override string ToString()
+        {
+            return "[Stop]";
+        }
     }
 }

@@ -6,21 +6,6 @@ namespace DslOverXamlDemo.ViewModel
 {
     public sealed class MainWindowViewModel : ChangeableEx
     {
-        private DataStoreViewModel m_dataStore;
-
-        public DataStoreViewModel DataStore
-        {
-            get { return m_dataStore ?? (m_dataStore = new DataStoreViewModel()); }
-            set
-            {
-                if (m_dataStore != value)
-                {
-                    m_dataStore = value;
-                    NotifyOfPropertyChange(() => DataStore);
-                }
-            }
-        }
-
         private LoggingViewModel m_logging;
 
         public LoggingViewModel Logging
@@ -68,7 +53,7 @@ namespace DslOverXamlDemo.ViewModel
 
         public void HandleClosing(CancelEventArgs args)
         {
-            if (DataStore.IsModified)
+            if (OrderProcessing.IsModified)
             {
                 switch (MessageBox.Show("Save changes to the Sample Data?", "Saving changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
                 {
@@ -76,7 +61,7 @@ namespace DslOverXamlDemo.ViewModel
                         args.Cancel = true;
                         return;
                     case MessageBoxResult.Yes:
-                        DataStore.Save();
+                        OrderProcessing.Save();
                         break;
                 }
             }

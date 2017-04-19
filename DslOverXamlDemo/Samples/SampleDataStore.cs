@@ -8,68 +8,65 @@ namespace DslOverXamlDemo.Samples
 {
     public static class SampleDataStore
     {
-        public static DataStore GetOrCreateSampleData()
+        public static Order GetOrCreateOrder()
         {
-            return Settings.Default.SampleData ?? CreateSampleData();
+            return Settings.Default.OrderData ?? CreateSampleOrder();
         }
 
-        public static DataStore CreateSampleData()
+        public static Order CreateSampleOrder()
         {
-            return new DataStore
+            return new Order
             {
-                Order = new Order
+                Id = IdGenerator.AutoInc(),
+                Date = DateTime.Today,
+                Name = "Demo Order",
+                Customer = new Customer
                 {
                     Id = IdGenerator.AutoInc(),
-                    Date = DateTime.Today,
-                    Name = "Demo Order",
-                    Customer = new Customer
+                    Name = "John Brown",
+                    Age = 16,
+                    Email = "john.brown@gmail.com"
+                },
+                Items = new List<OrderItem>
+                {
+                    new OrderItem
                     {
                         Id = IdGenerator.AutoInc(),
-                        Name = "John Brown",
-                        Age = 16,
-                        Email = "john.brown@gmail.com"
+                        Product = new Product
+                        {
+                            Id = IdGenerator.AutoInc(),
+                            Category = ProductType.Electronics,
+                            Name = "Cell Phone",
+                            Description = "Smartphone",
+                            Price = 150M
+                        },
+                        Quantity = 1
                     },
-                    Items = new List<OrderItem>
+                    new OrderItem
                     {
-                        new OrderItem
+                        Id = IdGenerator.AutoInc(),
+                        Product = new Product
                         {
                             Id = IdGenerator.AutoInc(),
-                            Product = new Product
-                            {
-                                Id = IdGenerator.AutoInc(),
-                                Category = ProductType.Electronics,
-                                Name = "Cell Phone",
-                                Description = "Smartphone",
-                                Price = 150M
-                            },
-                            Quantity = 1
+                            Category = ProductType.Clothing,
+                            Name = "Shirt",
+                            Description = "Men's Shirt",
+                            Price = 25M
                         },
-                        new OrderItem
+                        Quantity = 3
+                    },
+                    new OrderItem
+                    {
+                        Id = IdGenerator.AutoInc(),
+                        Product = new Product
                         {
                             Id = IdGenerator.AutoInc(),
-                            Product = new Product
-                            {
-                                Id = IdGenerator.AutoInc(),
-                                Category = ProductType.Clothing,
-                                Name = "Shirt",
-                                Description = "Men's Shirt",
-                                Price = 25M
-                            },
-                            Quantity = 3
+                            Category = ProductType.Clothing,
+                            Name = "Socks",
+                            Description = "Black Socks",
+                            Price = 15M
                         },
-                        new OrderItem
-                        {
-                            Id = IdGenerator.AutoInc(),
-                            Product = new Product
-                            {
-                                Id = IdGenerator.AutoInc(),
-                                Category = ProductType.Clothing,
-                                Name = "Socks",
-                                Description = "Black Socks",
-                                Price = 15M
-                            },
-                            Quantity = 2
-                        }
+                        Quantity = 2
                     }
                 }
             };

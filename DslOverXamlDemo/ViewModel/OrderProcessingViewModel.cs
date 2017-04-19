@@ -16,20 +16,31 @@ namespace DslOverXamlDemo.ViewModel
     {
         public OrderProcessingViewModel()
         {
-            Disposables.Add(EventAggregator.Instance.GetEventStream<ApplicationEvents.SettingsRefreshed>().Subscribe(x => Order = null));
+            SaveCommand = new RelayCommand(() => Save(), () => IsModified);
+            LoadDefaultCommand = new RelayCommand(() => LoadDefault());
+            ProcessCommand = new RelayCommand(ProcessOrderAsync);
         }
 
-        private Order m_order;
+        private OrderViewModel m_order;
 
-        public Order Order
+        public OrderViewModel Order
         {
-            get { return m_order ?? (m_order = SampleDataStore.GetOrCreateSampleData().Order); }
+            get
+            {
+                if (m_order == null)
+                {
+                    m_order = new OrderViewModel(SampleDataStore.GetOrCreateOrder());
+                    m_order.OnModified += (sender, args) => Changed();
+                }
+                return m_order;
+            }
             set
             {
                 if (m_order != value)
                 {
                     m_order = value;
                     NotifyOfPropertyChange(() => Order);
+                    Changed();
                 }
             }
         }
@@ -64,19 +75,35 @@ namespace DslOverXamlDemo.ViewModel
             }
         }
 
-        private ICommand m_processCommand;
+        public ICommand SaveCommand { get; }
+        public ICommand LoadDefaultCommand { get; }
+        public ICommand ProcessCommand { get; }
 
-        public ICommand ProcessCommand => m_processCommand ?? (m_processCommand = new RelayCommand(ProcessOrderAsync));
+        public void Save()
+        {
+            Settings.Default.OrderData = Order.Model;
+            Settings.Default.Save();
+            IsModified = false;
+            LogInfo("Data model has been saved successfully.");
+            EventAggregator.Instance.Publish(new ApplicationEvents.SettingsRefreshed());
+        }
+
+        public void LoadDefault()
+        {
+            Settings.Default.OrderData = null;
+            Order = null;
+            LogInfo("Loaded default sample order.");
+        }
 
         public async Task ProcessOrderAsync()
         {
             var rule = RuleBuilder.CreateRuleImp(SampleRules.GetOrCreateSampleRule());
             if (rule == null)
                 throw new InvalidOperationException("Rule object is not defined.");
-            var context = new OrderDiscountContext(Order);
+            var context = new OrderDiscountContext(Order.Model);
             await context.ExecuteAsync(rule);
             Discounts = context.GetOrderDiscounts();
-            Total = DiscountLogic.GetOrderTotalAmount(Order, Discounts);
+            Total = DiscountLogic.GetOrderTotalAmount(Order.Model, Discounts);
             LogInfo("Order has been processed successfully.");
         }
     }

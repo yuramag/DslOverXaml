@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using DslOverXamlDemo.Contracts.Lib;
 
 namespace DslOverXamlDemo.Rules.Controls
 {
@@ -11,6 +12,27 @@ namespace DslOverXamlDemo.Rules.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Gadget), new FrameworkPropertyMetadata(typeof(Gadget)));
         }
 
+        public Gadget()
+        {
+            ToggleCommand = new RelayCommand(() => IsCollapsed = !IsCollapsed);
+        }
+
+        public ICommand ToggleCommand { get; }
+
+        #region IsCollapsed Property
+
+        public static readonly DependencyProperty IsCollapsedProperty =
+            DependencyProperty.Register("IsCollapsed", typeof(bool), typeof(Gadget),
+                new FrameworkPropertyMetadata(default(bool)));
+
+        public bool IsCollapsed
+        {
+            get { return (bool)GetValue(IsCollapsedProperty); }
+            set { SetValue(IsCollapsedProperty, value); }
+        }
+
+        #endregion
+
         #region Command Property
 
         public static readonly DependencyProperty CommandProperty =
@@ -19,7 +41,7 @@ namespace DslOverXamlDemo.Rules.Controls
 
         public static ICommand GetCommand(DependencyObject obj)
         {
-            return (ICommand) obj.GetValue(CommandProperty);
+            return (ICommand)obj.GetValue(CommandProperty);
         }
 
         public static void SetCommand(DependencyObject obj, ICommand value)
@@ -55,7 +77,7 @@ namespace DslOverXamlDemo.Rules.Controls
 
         public static GadgetType GetGadgetType(DependencyObject obj)
         {
-            return (GadgetType) obj.GetValue(GadgetTypeProperty);
+            return (GadgetType)obj.GetValue(GadgetTypeProperty);
         }
 
         public static void SetGadgetType(DependencyObject obj, GadgetType value)

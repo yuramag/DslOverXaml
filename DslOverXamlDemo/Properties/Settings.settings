@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DslOverXamlDemo.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="SampleDataJson" Type="System.String" Scope="User">
+    <Setting Name="OrderDataJson" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="SampleRuleXaml" Type="System.String" Scope="User">

@@ -78,6 +78,7 @@
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\EqulityToVisibilityConverter.cs" />
     <Compile Include="Converters\FuncValueConverter.cs" />
+    <Compile Include="Converters\GenericEqulityConverter.cs" />
     <Compile Include="Converters\InequalityToVisibilityConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\InverseBoolToIntConverter.cs" />

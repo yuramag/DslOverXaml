@@ -5,15 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:DslOverXamlDemo.ViewModel"
              xmlns:model="clr-namespace:DslOverXamlDemo.Model;assembly=DslOverXamlDemo.Model"
+             xmlns:controls="clr-namespace:DslOverXamlDemo.Rules.Controls;assembly=DslOverXamlDemo.Rules"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance {x:Type vm:OrderProcessingViewModel}}">
     <UserControl.Resources>
-        <Style TargetType="{x:Type GroupBox}">
-            <Setter Property="Foreground" Value="Blue"/>
-        </Style>
+        <!--<Style TargetType="{x:Type GroupBox}">
+            <Setter Property="Foreground" Value="Navy"/>
+        </Style>-->
 
         <DataTemplate x:Key="DiscountItems" DataType="{x:Type model:OrderDiscount}">
-            <ItemsControl Style="{StaticResource RulesToolBar}">
+            <ItemsControl Style="{StaticResource RulesToolBar}" Foreground="Black">
                 <TextBlock Text="ID:"/>
                 <TextBlock Text="{Binding OrderItemId, StringFormat='[{0}]'}"/>
                 <TextBlock Text="{Binding DiscountType}"/>
@@ -50,43 +51,34 @@
 
             <StackPanel DockPanel.Dock="Top">
                 <GroupBox Header="Order" Margin="5">
-                    <StackPanel>
-                        <ItemsControl Style="{StaticResource RulesToolBar}">
+                    <StackPanel Orientation="Horizontal">
+                        <ItemsControl Style="{StaticResource RulesToolBar}" Margin="5">
                             <TextBlock Text="ID:"/>
-                            <TextBox Text="{Binding Order.Id}" IsReadOnly="True" MinWidth="50"/>
-
-                            <Separator Width="10" Visibility="Hidden" />
+                            <TextBlock Text="{Binding Order.Id}" FontWeight="Bold" Foreground="Black"/>
 
                             <TextBlock Text="Name:"/>
-                            <TextBox Text="{Binding Order.Name}" IsReadOnly="True" MinWidth="50"/>
-
-                            <Separator Width="10" Visibility="Hidden" />
+                            <controls:EditableTextBoxControl Text="{Binding Order.Name, Mode=TwoWay}"/>
 
                             <TextBlock Text="Date:"/>
-                            <TextBox Text="{Binding Order.Date}" IsReadOnly="True" MinWidth="50"/>
+                            <controls:EditableTextBoxControl Text="{Binding Order.Date, Mode=TwoWay, StringFormat=yyyy-MM-dd}"/>
+                            <DatePicker SelectedDate="{Binding Order.Date}" Width="30" BorderThickness="0" />
                         </ItemsControl>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Customer" Margin="5">
-                    <StackPanel>
-                        <ItemsControl Style="{StaticResource RulesToolBar}">
+                    <StackPanel Orientation="Horizontal">
+                        <ItemsControl Style="{StaticResource RulesToolBar}" Margin="10">
                             <TextBlock Text="ID:"/>
-                            <TextBox Text="{Binding Order.Customer.Id}" IsReadOnly="True" MinWidth="50"/>
-
-                            <Separator Width="10" Visibility="Hidden" />
+                            <TextBlock Text="{Binding Order.CustomerId}" FontWeight="Bold" Foreground="Black"/>
 
                             <TextBlock Text="Name:"/>
-                            <TextBox Text="{Binding Order.Customer.Name}" IsReadOnly="True" MinWidth="50"/>
-
-                            <Separator Width="10" Visibility="Hidden" />
+                            <controls:EditableTextBoxControl Text="{Binding Order.CustomerName, Mode=TwoWay}"/>
 
                             <TextBlock Text="Age:"/>
-                            <TextBox Text="{Binding Order.Customer.Age}" IsReadOnly="True" MinWidth="50"/>
-
-                            <Separator Width="10" Visibility="Hidden" />
+                            <controls:EditableTextBoxControl Text="{Binding Order.CustomerAge, Mode=TwoWay}"/>
 
                             <TextBlock Text="Email:"/>
-                            <TextBox Text="{Binding Order.Customer.Email}" IsReadOnly="True" MinWidth="50"/>
+                            <controls:EditableTextBoxControl Text="{Binding Order.CustomerEmail, Mode=TwoWay}"/>
                         </ItemsControl>
                     </StackPanel>
                 </GroupBox>
@@ -94,22 +86,28 @@
 
             <GroupBox Header="Order Items" Margin="5">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Bottom" Margin="5">
-                        <Run Text="Order Total:" Foreground="Black"/>
-                        <Run Text="{Binding Order.Total, Mode=OneWay, StringFormat=C}" Foreground="DarkRed" FontSize="14" FontWeight="Bold"/>
-                    </TextBlock>
+                    <DockPanel DockPanel.Dock="Bottom" Margin="5">
+                        <ItemsControl DockPanel.Dock="Right" Style="{StaticResource RulesToolBar}">
+                            <Button Content="Load Default" Command="{Binding LoadDefaultCommand}"/>
+                            <Button Content="Save" Command="{Binding SaveCommand}"/>
+                        </ItemsControl>
 
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Order.Items}" IsReadOnly="True" Margin="5" 
-                              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <TextBlock VerticalAlignment="Center">
+                            <Run Text="Order Total:" Foreground="Black"/>
+                            <Run Text="{Binding Order.Model.Total, Mode=OneWay, StringFormat=C}" Foreground="DarkRed" FontSize="14" FontWeight="Bold"/>
+                        </TextBlock>
+                    </DockPanel>
+
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Order.Items}" Margin="5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Item ID" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Header="Product ID" Binding="{Binding Product.Id}"/>
-                            <DataGridTextColumn Header="Product Name" Binding="{Binding Product.Name}"/>
-                            <DataGridTextColumn Header="Description" Binding="{Binding Product.Description}"/>
-                            <DataGridTextColumn Header="Category" Binding="{Binding Product.Category}"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Product.Price}"/>
+                            <DataGridTextColumn Header="Item ID" Binding="{Binding Id, Mode=OneWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Product ID" Binding="{Binding ProductId, Mode=OneWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding ProductDescription}"/>
+                            <DataGridTextColumn Header="Category" Binding="{Binding ProductCategory}"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding ProductPrice}"/>
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
-                            <DataGridTextColumn Header="Total" Binding="{Binding Total, Mode=OneWay}"/>
+                            <DataGridTextColumn Header="Total" Binding="{Binding Total, Mode=OneWay}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
