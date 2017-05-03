@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DslOverXamlDemo.Engine
+namespace DslOverXamlDemo.Engine.Context
 {
     public static class ContextExtensions
     {

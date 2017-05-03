@@ -36,12 +36,14 @@
     <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine\ExecutionControlService.cs" />
-    <Compile Include="Engine\IExecutionControlService.cs" />
-    <Compile Include="Engine\IExecutionScope.cs" />
+    <Compile Include="Services\ConnectionStringService.cs" />
+    <Compile Include="Services\Implementation\ExecutionControlService.cs" />
+    <Compile Include="Services\IConnectionStringService.cs" />
+    <Compile Include="Services\IExecutionControlService.cs" />
+    <Compile Include="Services\IExecutionScope.cs" />
     <Compile Include="OrderProcessing\DataRepository.cs" />
-    <Compile Include="Engine\Context.cs" />
-    <Compile Include="Engine\ContextExtensions.cs" />
+    <Compile Include="Context\Context.cs" />
+    <Compile Include="Context\ContextExtensions.cs" />
     <Compile Include="OrderProcessing\DiscountLogic.cs" />
     <Compile Include="OrderProcessing\DiscountsContainerService.cs" />
     <Compile Include="OrderProcessing\OrderDiscountContext.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="Parts\Conditions\ProductQuantityImp.cs" />
     <Compile Include="Parts\Conditions\RangeCondition.cs" />
     <Compile Include="Parts\Conditions\TrueImp.cs" />
-    <Compile Include="Engine\IContext.cs" />
+    <Compile Include="Context\IContext.cs" />
     <Compile Include="Parts\Rules\ConditionRuleImp.cs" />
     <Compile Include="Parts\Value\ConstantImp.cs" />
     <Compile Include="Parts\Value\ProductClearancePercentImp.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Parts\Value\ValueImp.cs" />
     <Compile Include="Utils\CodeMatch.cs" />
     <Compile Include="Utils\Helper.cs" />
+    <Compile Include="Utils\IdGenerator.cs" />
     <Compile Include="Utils\RuleBuilder.cs" />
     <Compile Include="Utils\RuleBuildingVisitor.cs" />
     <Compile Include="Utils\RuleExecutor.cs" />

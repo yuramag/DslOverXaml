@@ -49,7 +49,6 @@
     <Compile Include="Model\DiscountType.cs" />
     <Compile Include="Model\OrderDiscount.cs" />
     <Compile Include="Model\ProductType.cs" />
-    <Compile Include="Utils\IdGenerator.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Model\Product.cs" />

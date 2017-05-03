@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using DslOverXamlDemo.Engine.Context;
 using DslOverXamlDemo.Engine.OrderProcessing;
 
 namespace DslOverXamlDemo.Engine.Parts

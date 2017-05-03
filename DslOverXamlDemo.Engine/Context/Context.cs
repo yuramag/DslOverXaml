@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using DslOverXamlDemo.Engine.Services;
 
-namespace DslOverXamlDemo.Engine
+namespace DslOverXamlDemo.Engine.Context
 {
     public class Context : IContext
     {

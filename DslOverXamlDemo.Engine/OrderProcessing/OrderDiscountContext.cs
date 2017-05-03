@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DslOverXamlDemo.Engine.Context;
 using DslOverXamlDemo.Engine.Parts;
 using DslOverXamlDemo.Engine.Utils;
 using DslOverXamlDemo.Model;
 
 namespace DslOverXamlDemo.Engine.OrderProcessing
 {
-    public sealed class OrderDiscountContext : Context
+    public sealed class OrderDiscountContext : Context.Context
     {
         public OrderDiscountContext(Order order)
         {

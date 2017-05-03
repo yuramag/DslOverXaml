@@ -1,4 +1,4 @@
-﻿namespace DslOverXamlDemo.Model.Utils
+﻿namespace DslOverXamlDemo.Engine.Utils
 {
     public static class IdGenerator
     {

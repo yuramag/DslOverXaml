@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using DslOverXamlDemo.Engine.Utils;
 using DslOverXamlDemo.Model;
-using DslOverXamlDemo.Model.Utils;
 using DslOverXamlDemo.Properties;
 
 namespace DslOverXamlDemo.Samples

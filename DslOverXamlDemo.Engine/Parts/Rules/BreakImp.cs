@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using DslOverXamlDemo.Engine.Context;
+using DslOverXamlDemo.Engine.Services;
 
 namespace DslOverXamlDemo.Engine.Parts
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DslOverXamlDemo.Engine
+namespace DslOverXamlDemo.Engine.Services
 {
     internal sealed class ExecutionControlService : IExecutionControlService
     {
